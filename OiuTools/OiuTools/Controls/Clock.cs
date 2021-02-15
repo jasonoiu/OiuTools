@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Windows.Forms;
+using DevExpress.XtraEditors;
 
 namespace OiuTools.Controls
 {
-    public partial class Clock : UserControl
+    public partial class Clock : XtraUserControl
     {
         Timer timer = new Timer();
         public Clock()

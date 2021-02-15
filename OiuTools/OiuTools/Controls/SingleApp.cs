@@ -7,15 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DevExpress.XtraEditors;
+using OiuTools.Model;
 
 namespace OiuTools.Controls
 {
-    public partial class BlegMM : XtraUserControl
+    public partial class SingleApp : DevExpress.XtraEditors.XtraUserControl
     {
-        public BlegMM()
+        public AppModel Model;
+
+
+        public SingleApp(AppModel model)
         {
+            Model = model;
             InitializeComponent();
+            pic.Image = Image.FromFile(model.IconUrl);
+            lblName.Text = Model.Name;
         }
     }
 }

@@ -7,10 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.XtraEditors;
 
 namespace OiuTools.Controls
 {
-    public partial class Calendar : UserControl
+    public partial class Calendar : XtraUserControl
     {
         public Calendar()
         {

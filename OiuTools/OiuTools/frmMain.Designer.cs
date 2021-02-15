@@ -34,37 +34,54 @@ namespace OiuTools
             DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer dockingContainer2 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer();
             DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer dockingContainer3 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer();
             DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer dockingContainer4 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer();
-            this.documentGroup2 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DocumentGroup(this.components);
-            this.Calendar = new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document(this.components);
             this.documentGroup3 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DocumentGroup(this.components);
-            this.App = new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document(this.components);
-            this.Clock = new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document(this.components);
             this.BlegMM = new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document(this.components);
+            this.documentGroup2 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DocumentGroup(this.components);
+            this.Clock = new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document(this.components);
+            this.Calendar = new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document(this.components);
+            this.documentGroup1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DocumentGroup(this.components);
+            this.App = new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document(this.components);
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.rpgSystem = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.dm = new DevExpress.XtraBars.Docking2010.DocumentManager(this.components);
             this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
             this.barAndDockingController1 = new DevExpress.XtraBars.BarAndDockingController(this.components);
-            this.documentGroup1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DocumentGroup(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.documentGroup2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Calendar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentGroup3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.App)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Clock)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BlegMM)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.documentGroup2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Clock)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Calendar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.documentGroup1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.App)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barAndDockingController1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.documentGroup1)).BeginInit();
             this.SuspendLayout();
+            // 
+            // documentGroup3
+            // 
+            this.documentGroup3.Items.AddRange(new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document[] {
+            this.BlegMM});
+            // 
+            // BlegMM
+            // 
+            this.BlegMM.Caption = "BlegMM";
+            this.BlegMM.ControlName = "BlegMM";
+            this.BlegMM.ControlTypeName = "OiuTools.Controls.BlegMM";
             // 
             // documentGroup2
             // 
             this.documentGroup2.Items.AddRange(new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document[] {
             this.Clock,
             this.Calendar});
+            // 
+            // Clock
+            // 
+            this.Clock.Caption = "Clock";
+            this.Clock.ControlName = "Clock";
+            this.Clock.ControlTypeName = "OiuTools.Controls.Clock";
             // 
             // Calendar
             // 
@@ -74,28 +91,16 @@ namespace OiuTools
             this.Calendar.FloatLocation = new System.Drawing.Point(1213, 374);
             this.Calendar.FloatSize = new System.Drawing.Size(248, 118);
             // 
-            // documentGroup3
+            // documentGroup1
             // 
-            this.documentGroup3.Items.AddRange(new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document[] {
-            this.BlegMM});
+            this.documentGroup1.Items.AddRange(new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document[] {
+            this.App});
             // 
             // App
             // 
             this.App.Caption = "App";
             this.App.ControlName = "App";
             this.App.ControlTypeName = "OiuTools.Controls.App";
-            // 
-            // Clock
-            // 
-            this.Clock.Caption = "Clock";
-            this.Clock.ControlName = "Clock";
-            this.Clock.ControlTypeName = "OiuTools.Controls.Clock";
-            // 
-            // BlegMM
-            // 
-            this.BlegMM.Caption = "BlegMM";
-            this.BlegMM.ControlName = "BlegMM";
-            this.BlegMM.ControlTypeName = "OiuTools.Controls.BlegMM";
             // 
             // ribbonControl1
             // 
@@ -157,11 +162,6 @@ namespace OiuTools
             dockingContainer1,
             dockingContainer2});
             // 
-            // documentGroup1
-            // 
-            this.documentGroup1.Items.AddRange(new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document[] {
-            this.App});
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -173,18 +173,19 @@ namespace OiuTools
             this.Ribbon = this.ribbonControl1;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "OiuTools";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.frmMain_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.documentGroup2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Calendar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentGroup3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.App)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Clock)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BlegMM)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.documentGroup2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Clock)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Calendar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.documentGroup1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.App)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dm)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabbedView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barAndDockingController1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.documentGroup1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
