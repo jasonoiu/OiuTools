@@ -22,38 +22,61 @@ namespace OiuTools.Controls
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.gaugeControl1 = new DevExpress.XtraGauges.Win.GaugeControl();
+            this.dgNowTime = new DevExpress.XtraGauges.Win.Gauges.Digital.DigitalGauge();
+            this.digitalBackgroundLayerComponent1 = new DevExpress.XtraGauges.Win.Gauges.Digital.DigitalBackgroundLayerComponent();
+            ((System.ComponentModel.ISupportInitialize)(this.dgNowTime)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.digitalBackgroundLayerComponent1)).BeginInit();
             this.SuspendLayout();
             // 
-            // labelControl1
+            // gaugeControl1
             // 
-            this.labelControl1.AllowHtmlString = true;
-            this.labelControl1.Appearance.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.Appearance.Options.UseTextOptions = true;
-            this.labelControl1.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.labelControl1.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.labelControl1.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.labelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelControl1.Location = new System.Drawing.Point(0, 0);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(195, 166);
-            this.labelControl1.TabIndex = 1;
-            this.labelControl1.Text = "labelControl1";
+            this.gaugeControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.gaugeControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gaugeControl1.Gauges.AddRange(new DevExpress.XtraGauges.Base.IGauge[] {
+            this.dgNowTime});
+            this.gaugeControl1.Location = new System.Drawing.Point(0, 0);
+            this.gaugeControl1.Name = "gaugeControl1";
+            this.gaugeControl1.Size = new System.Drawing.Size(227, 208);
+            this.gaugeControl1.TabIndex = 0;
+            // 
+            // dgNowTime
+            // 
+            this.dgNowTime.AppearanceOff.ContentBrush = new DevExpress.XtraGauges.Core.Drawing.SolidBrushObject("Color:#C8C8C8");
+            this.dgNowTime.AppearanceOn.ContentBrush = new DevExpress.XtraGauges.Core.Drawing.SolidBrushObject("Color:Black");
+            this.dgNowTime.BackgroundLayers.AddRange(new DevExpress.XtraGauges.Win.Gauges.Digital.DigitalBackgroundLayerComponent[] {
+            this.digitalBackgroundLayerComponent1});
+            this.dgNowTime.Bounds = new System.Drawing.Rectangle(6, 6, 215, 196);
+            this.dgNowTime.DigitCount = 6;
+            this.dgNowTime.Name = "dgNowTime";
+            this.dgNowTime.Text = "00:00:00";
+            // 
+            // digitalBackgroundLayerComponent1
+            // 
+            this.digitalBackgroundLayerComponent1.BottomRight = new DevExpress.XtraGauges.Core.Base.PointF2D(307.775F, 99.9625F);
+            this.digitalBackgroundLayerComponent1.Name = "digitalBackgroundLayerComponent13";
+            this.digitalBackgroundLayerComponent1.ShapeType = DevExpress.XtraGauges.Core.Model.DigitalBackgroundShapeSetType.Style11;
+            this.digitalBackgroundLayerComponent1.TopLeft = new DevExpress.XtraGauges.Core.Base.PointF2D(20F, 0F);
+            this.digitalBackgroundLayerComponent1.ZOrder = 1000;
             // 
             // Clock
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.labelControl1);
+            this.Controls.Add(this.gaugeControl1);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Clock";
-            this.Size = new System.Drawing.Size(195, 166);
+            this.Size = new System.Drawing.Size(227, 208);
+            ((System.ComponentModel.ISupportInitialize)(this.dgNowTime)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.digitalBackgroundLayerComponent1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private DevExpress.XtraEditors.LabelControl labelControl1;
+        private DevExpress.XtraGauges.Win.GaugeControl gaugeControl1;
+        private DevExpress.XtraGauges.Win.Gauges.Digital.DigitalGauge dgNowTime;
+        private DevExpress.XtraGauges.Win.Gauges.Digital.DigitalBackgroundLayerComponent digitalBackgroundLayerComponent1;
     }
 }

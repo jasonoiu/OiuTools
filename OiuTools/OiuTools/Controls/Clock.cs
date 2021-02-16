@@ -43,10 +43,8 @@ namespace OiuTools.Controls
                 DisableTimer();
                 return;
             }
-            var currentDate = System.DateTime.Now;
-            labelControl1.Text =
-                "<b>" + currentDate.ToLongTimeString() +
-                "</b><br><size=10>" + currentDate.ToLongDateString();
+            var now = System.DateTime.Now;
+            dgNowTime.Text = $"{now.Hour.ToString().PadLeft(2,'0')}:{now.Minute.ToString().PadLeft(2, '0')}:{now.Second.ToString().PadLeft(2, '0')}";
         }
     }
 }

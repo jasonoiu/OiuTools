@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,11 @@ namespace OiuTools.Controls
             InitializeComponent();
             pic.Image = Image.FromFile(model.IconUrl);
             lblName.Text = Model.Name;
+        }
+
+        private void SingleApp_Click(object sender, EventArgs e)
+        {
+            Process.Start(Model.AppUrl);
         }
     }
 }

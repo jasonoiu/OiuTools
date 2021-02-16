@@ -35,7 +35,7 @@ namespace OiuTools.Controls
             {
                 foreach (var app in ms.AppList)
                 {
-                    layoutControl1.Controls.Add(new SingleApp(app));
+                    sp.Controls.Add(new SingleApp(app));
                 }
             }
         }
@@ -72,7 +72,7 @@ namespace OiuTools.Controls
                     Name = fileDialog.SafeFileName.Replace(".exe", "")
                 };
                 var app = new SingleApp(appModel);
-                layoutControl1.Controls.Add(app);
+                sp.Controls.Add(app);
                 ms.AppList.Add(appModel);
                 ms.Save();
             }

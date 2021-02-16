@@ -39,8 +39,10 @@ namespace OiuTools.Controls
             this.pic.Location = new System.Drawing.Point(3, 3);
             this.pic.Name = "pic";
             this.pic.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
+            this.pic.Properties.ShowMenu = false;
             this.pic.Size = new System.Drawing.Size(60, 60);
             this.pic.TabIndex = 0;
+            this.pic.Click += new System.EventHandler(this.SingleApp_Click);
             // 
             // lblName
             // 
@@ -56,6 +58,7 @@ namespace OiuTools.Controls
             this.lblName.Size = new System.Drawing.Size(57, 34);
             this.lblName.TabIndex = 1;
             this.lblName.Text = "App Name";
+            this.lblName.Click += new System.EventHandler(this.SingleApp_Click);
             // 
             // SingleApp
             // 

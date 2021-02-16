@@ -36,10 +36,22 @@ namespace OiuTools
 
         private MySettings() { }
 
-
+        /// <summary>
+        /// APP列表
+        /// </summary>
         public List<AppModel> AppList { get; set; }
 
-        
+        /// <summary>
+        /// 皮肤
+        /// </summary>
+        public string SkinName { get; set; }
+
+        /// <summary>
+        /// 颜色
+        /// </summary>
+        public string PaletteName { get; set; }
+
+
         /// <summary>
         /// 点击关闭按钮的时候，是否退出程序。
         /// </summary>

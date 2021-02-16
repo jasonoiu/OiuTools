@@ -30,21 +30,39 @@ namespace OiuTools.Controls
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            this.popupMenu1 = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.fileDialog = new DevExpress.XtraEditors.XtraOpenFileDialog(this.components);
+            this.sp = new System.Windows.Forms.FlowLayoutPanel();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.barAddApp = new DevExpress.XtraBars.BarButtonItem();
-            this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.popupMenu1 = new DevExpress.XtraBars.PopupMenu(this.components);
-            this.fileDialog = new DevExpress.XtraEditors.XtraOpenFileDialog(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             this.SuspendLayout();
+            // 
+            // popupMenu1
+            // 
+            this.popupMenu1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barAddApp)});
+            this.popupMenu1.Manager = this.barManager1;
+            this.popupMenu1.Name = "popupMenu1";
+            // 
+            // fileDialog
+            // 
+            this.fileDialog.DefaultExt = "exe";
+            this.fileDialog.Filter = "Exe files (*.exe)|*.exe";
+            // 
+            // sp
+            // 
+            this.sp.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sp.Location = new System.Drawing.Point(0, 0);
+            this.sp.Name = "sp";
+            this.sp.Size = new System.Drawing.Size(547, 352);
+            this.sp.TabIndex = 0;
+            this.sp.MouseClick += new System.Windows.Forms.MouseEventHandler(this.flyoutPanelControl1_MouseClick);
             // 
             // barManager1
             // 
@@ -92,45 +110,9 @@ namespace OiuTools.Controls
             // barAddApp
             // 
             this.barAddApp.Caption = "Add App";
-            this.barAddApp.Id = 1;
+            this.barAddApp.Id = 0;
             this.barAddApp.Name = "barAddApp";
             this.barAddApp.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barAddApp_ItemClick);
-            // 
-            // layoutControl1
-            // 
-            this.layoutControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.layoutControl1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControl1.MenuManager = this.barManager1;
-            this.layoutControl1.Name = "layoutControl1";
-            this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(933, 60, 650, 400);
-            this.barManager1.SetPopupContextMenu(this.layoutControl1, this.popupMenu1);
-            this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(547, 352);
-            this.layoutControl1.TabIndex = 7;
-            this.layoutControl1.Text = "layoutControl1";
-            this.layoutControl1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.flyoutPanelControl1_MouseClick);
-            // 
-            // Root
-            // 
-            this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
-            this.Root.GroupBordersVisible = false;
-            this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(547, 352);
-            this.Root.TextVisible = false;
-            // 
-            // popupMenu1
-            // 
-            this.popupMenu1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.barAddApp)});
-            this.popupMenu1.Manager = this.barManager1;
-            this.popupMenu1.Name = "popupMenu1";
-            // 
-            // fileDialog
-            // 
-            this.fileDialog.DefaultExt = "exe";
-            this.fileDialog.Filter = "Exe files (*.exe)|*.exe";
             // 
             // App
             // 
@@ -138,7 +120,7 @@ namespace OiuTools.Controls
             this.Appearance.Options.UseFont = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.layoutControl1);
+            this.Controls.Add(this.sp);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
@@ -147,25 +129,22 @@ namespace OiuTools.Controls
             this.Name = "App";
             this.Size = new System.Drawing.Size(547, 352);
             this.Load += new System.EventHandler(this.App_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private DevExpress.XtraBars.BarDockControl barDockControlLeft;
+        private DevExpress.XtraBars.PopupMenu popupMenu1;
+        private DevExpress.XtraEditors.XtraOpenFileDialog fileDialog;
+        private System.Windows.Forms.FlowLayoutPanel sp;
+        private DevExpress.XtraBars.BarButtonItem barAddApp;
         private DevExpress.XtraBars.BarManager barManager1;
         private DevExpress.XtraBars.BarDockControl barDockControlTop;
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
+        private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
-        private DevExpress.XtraLayout.LayoutControl layoutControl1;
-        private DevExpress.XtraLayout.LayoutControlGroup Root;
-        private DevExpress.XtraBars.BarButtonItem barAddApp;
-        private DevExpress.XtraBars.PopupMenu popupMenu1;
-        private DevExpress.XtraEditors.XtraOpenFileDialog fileDialog;
     }
 }
