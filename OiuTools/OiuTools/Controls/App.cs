@@ -107,6 +107,9 @@ namespace OiuTools.Controls
             public static extern uint ExtractIconEx(string lpszFile, int nIconIndex, int[] phiconLarge, int[] phiconSmall, uint nIcons);
         }
 
-        
+        private void barRemoveApp_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            
+        }
     }
 }

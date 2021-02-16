@@ -30,10 +30,11 @@ namespace OiuTools
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer dockingContainer13 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer();
-            DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer dockingContainer14 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer();
-            DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer dockingContainer15 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer();
-            DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer dockingContainer16 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer();
+            DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer dockingContainer5 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer();
+            DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer dockingContainer6 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer();
+            DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer dockingContainer7 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer();
+            DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer dockingContainer8 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.documentGroup3 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DocumentGroup(this.components);
             this.BlegMM = new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document(this.components);
             this.documentGroup2 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DocumentGroup(this.components);
@@ -44,17 +45,19 @@ namespace OiuTools
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.barRefreshWallPaper = new DevExpress.XtraBars.BarButtonItem();
             this.barToggleChanging = new DevExpress.XtraBars.BarToggleSwitchItem();
+            this.skinRibbonGalleryBarItem = new DevExpress.XtraBars.SkinRibbonGalleryBarItem();
+            this.skinPaletteRibbonGalleryBarItem = new DevExpress.XtraBars.SkinPaletteRibbonGalleryBarItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.rpgSystem = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.rpgWallPaper = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPage2 = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.dm = new DevExpress.XtraBars.Docking2010.DocumentManager(this.components);
             this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
             this.barAndDockingController1 = new DevExpress.XtraBars.BarAndDockingController(this.components);
             this.timerWallPaper = new System.Windows.Forms.Timer(this.components);
-            this.ribbonPage2 = new DevExpress.XtraBars.Ribbon.RibbonPage();
-            this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.skinRibbonGalleryBarItem = new DevExpress.XtraBars.SkinRibbonGalleryBarItem();
-            this.skinPaletteRibbonGalleryBarItem = new DevExpress.XtraBars.SkinPaletteRibbonGalleryBarItem();
+            this.barBackUp = new DevExpress.XtraBars.BarButtonItem();
+            this.barBackHome = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.documentGroup3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BlegMM)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentGroup2)).BeginInit();
@@ -119,9 +122,11 @@ namespace OiuTools
             this.barRefreshWallPaper,
             this.barToggleChanging,
             this.skinRibbonGalleryBarItem,
-            this.skinPaletteRibbonGalleryBarItem});
+            this.skinPaletteRibbonGalleryBarItem,
+            this.barBackUp,
+            this.barBackHome});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 7;
+            this.ribbonControl1.MaxItemId = 9;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.OptionsMenuMinWidth = 385;
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
@@ -147,6 +152,20 @@ namespace OiuTools
             this.barToggleChanging.Name = "barToggleChanging";
             this.barToggleChanging.CheckedChanged += new DevExpress.XtraBars.ItemClickEventHandler(this.barToggleChanging_CheckedChanged);
             // 
+            // skinRibbonGalleryBarItem
+            // 
+            this.skinRibbonGalleryBarItem.Caption = "skinRibbonGalleryBarItem1";
+            this.skinRibbonGalleryBarItem.Id = 5;
+            this.skinRibbonGalleryBarItem.Name = "skinRibbonGalleryBarItem";
+            this.skinRibbonGalleryBarItem.GalleryItemClick += new DevExpress.XtraBars.Ribbon.GalleryItemClickEventHandler(this.skinRibbonGalleryBarItem_GalleryItemClick);
+            // 
+            // skinPaletteRibbonGalleryBarItem
+            // 
+            this.skinPaletteRibbonGalleryBarItem.Caption = "skinPaletteRibbonGalleryBarItem1";
+            this.skinPaletteRibbonGalleryBarItem.Id = 6;
+            this.skinPaletteRibbonGalleryBarItem.Name = "skinPaletteRibbonGalleryBarItem";
+            this.skinPaletteRibbonGalleryBarItem.GalleryItemClick += new DevExpress.XtraBars.Ribbon.GalleryItemClickEventHandler(this.skinPaletteRibbonGalleryBarItem_GalleryItemClick);
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -164,8 +183,24 @@ namespace OiuTools
             // 
             this.rpgWallPaper.ItemLinks.Add(this.barRefreshWallPaper);
             this.rpgWallPaper.ItemLinks.Add(this.barToggleChanging);
+            this.rpgWallPaper.ItemLinks.Add(this.barBackUp);
+            this.rpgWallPaper.ItemLinks.Add(this.barBackHome);
             this.rpgWallPaper.Name = "rpgWallPaper";
             this.rpgWallPaper.Text = "WallPaper";
+            // 
+            // ribbonPage2
+            // 
+            this.ribbonPage2.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.ribbonPageGroup1});
+            this.ribbonPage2.Name = "ribbonPage2";
+            this.ribbonPage2.Text = "Skin";
+            // 
+            // ribbonPageGroup1
+            // 
+            this.ribbonPageGroup1.ItemLinks.Add(this.skinRibbonGalleryBarItem);
+            this.ribbonPageGroup1.ItemLinks.Add(this.skinPaletteRibbonGalleryBarItem);
+            this.ribbonPageGroup1.Name = "ribbonPageGroup1";
+            this.ribbonPageGroup1.Text = "Theme";
             // 
             // dm
             // 
@@ -187,20 +222,20 @@ namespace OiuTools
             this.BlegMM,
             this.Calendar});
             this.tabbedView1.EnableFreeLayoutMode = DevExpress.Utils.DefaultBoolean.True;
-            dockingContainer13.Element = this.documentGroup3;
-            dockingContainer13.Length.UnitValue = 1.583527943012411D;
-            dockingContainer14.Length.UnitValue = 0.38650951017110968D;
-            dockingContainer15.Element = this.documentGroup2;
-            dockingContainer15.Length.UnitValue = 0.38563140612050073D;
-            dockingContainer16.Element = this.documentGroup1;
-            dockingContainer16.Length.UnitValue = 1.9427081694100861D;
-            dockingContainer14.Nodes.AddRange(new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer[] {
-            dockingContainer15,
-            dockingContainer16});
-            dockingContainer14.Orientation = System.Windows.Forms.Orientation.Vertical;
+            dockingContainer5.Element = this.documentGroup3;
+            dockingContainer5.Length.UnitValue = 1.583527943012411D;
+            dockingContainer6.Length.UnitValue = 0.38650951017110968D;
+            dockingContainer7.Element = this.documentGroup2;
+            dockingContainer7.Length.UnitValue = 0.38563140612050073D;
+            dockingContainer8.Element = this.documentGroup1;
+            dockingContainer8.Length.UnitValue = 1.9427081694100861D;
+            dockingContainer6.Nodes.AddRange(new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer[] {
+            dockingContainer7,
+            dockingContainer8});
+            dockingContainer6.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.tabbedView1.RootContainer.Nodes.AddRange(new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer[] {
-            dockingContainer13,
-            dockingContainer14});
+            dockingContainer5,
+            dockingContainer6});
             // 
             // timerWallPaper
             // 
@@ -208,33 +243,24 @@ namespace OiuTools
             this.timerWallPaper.Interval = 10000;
             this.timerWallPaper.Tick += new System.EventHandler(this.timerWallPaper_Tick);
             // 
-            // ribbonPage2
+            // barBackUp
             // 
-            this.ribbonPage2.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
-            this.ribbonPageGroup1});
-            this.ribbonPage2.Name = "ribbonPage2";
-            this.ribbonPage2.Text = "Skin";
+            this.barBackUp.Caption = "Back";
+            this.barBackUp.Id = 7;
+            this.barBackUp.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.Image")));
+            this.barBackUp.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.LargeImage")));
+            this.barBackUp.Name = "barBackUp";
+            this.barBackUp.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBackUp_ItemClick);
             // 
-            // ribbonPageGroup1
+            // barBackHome
             // 
-            this.ribbonPageGroup1.ItemLinks.Add(this.skinRibbonGalleryBarItem);
-            this.ribbonPageGroup1.ItemLinks.Add(this.skinPaletteRibbonGalleryBarItem);
-            this.ribbonPageGroup1.Name = "ribbonPageGroup1";
-            this.ribbonPageGroup1.Text = "Theme";
-            // 
-            // skinRibbonGalleryBarItem
-            // 
-            this.skinRibbonGalleryBarItem.Caption = "skinRibbonGalleryBarItem1";
-            this.skinRibbonGalleryBarItem.Id = 5;
-            this.skinRibbonGalleryBarItem.Name = "skinRibbonGalleryBarItem";
-            this.skinRibbonGalleryBarItem.GalleryItemClick += new DevExpress.XtraBars.Ribbon.GalleryItemClickEventHandler(this.skinRibbonGalleryBarItem_GalleryItemClick);
-            // 
-            // skinPaletteRibbonGalleryBarItem
-            // 
-            this.skinPaletteRibbonGalleryBarItem.Caption = "skinPaletteRibbonGalleryBarItem1";
-            this.skinPaletteRibbonGalleryBarItem.Id = 6;
-            this.skinPaletteRibbonGalleryBarItem.Name = "skinPaletteRibbonGalleryBarItem";
-            this.skinPaletteRibbonGalleryBarItem.GalleryItemClick += new DevExpress.XtraBars.Ribbon.GalleryItemClickEventHandler(this.skinPaletteRibbonGalleryBarItem_GalleryItemClick);
+            this.barBackHome.Caption = "Home";
+            this.barBackHome.Id = 8;
+            this.barBackHome.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.Image1")));
+            this.barBackHome.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.LargeImage1")));
+            this.barBackHome.Name = "barBackHome";
+            this.barBackHome.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.barBackHome.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barBackHome_ItemClick);
             // 
             // frmMain
             // 
@@ -245,7 +271,7 @@ namespace OiuTools
             this.IconOptions.Image = global::OiuTools.Properties.Resources.logo;
             this.Name = "frmMain";
             this.Ribbon = this.ribbonControl1;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "OiuTools";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.frmMain_Load);
@@ -288,6 +314,8 @@ namespace OiuTools
         private DevExpress.XtraBars.SkinPaletteRibbonGalleryBarItem skinPaletteRibbonGalleryBarItem;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage2;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
+        private DevExpress.XtraBars.BarButtonItem barBackUp;
+        private DevExpress.XtraBars.BarButtonItem barBackHome;
     }
 }
 

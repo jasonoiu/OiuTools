@@ -23,10 +23,17 @@ namespace OiuTools
             ms = MySettings.Singleton;
             ss = SystemSettings.Singleton;
             dm.View.QueryControl += OnQueryControl;
+            timerWallPaper.Enabled = true;
 
             if (ms.SkinName.IsNotNullOrEmpty())
             {
                 UserLookAndFeel.Default.SetSkinStyle(ms.SkinName, ms.PaletteName);
+            }
+
+            if (!ms.LastLocation.IsEmpty)
+            {
+                Location = ms.LastLocation;
+                StartPosition = FormStartPosition.WindowsDefaultLocation;
             }
         }
 
@@ -38,10 +45,14 @@ namespace OiuTools
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             ms.MainFormSize = this.Size;
+            ms.LastLocation = this.Location;
             ss.Save();
             ms.Save();
 
         }
+
+        
+
 
         private void OnQueryControl(object sender, QueryControlEventArgs e)
         {
@@ -86,11 +97,14 @@ namespace OiuTools
                     }
 
                     curImgObj = null;
-                    timerWallPaper.Stop();
-                    timerWallPaper.Enabled = false;
-                    timerWallPaper.Interval = ss.Intervals;
-                    timerWallPaper.Enabled = true;
-                    timerWallPaper.Start();
+                    BeginInvoke(new Action((() =>
+                    {
+                        timerWallPaper.Stop();
+                        timerWallPaper.Enabled = false;
+                        timerWallPaper.Interval = ss.Intervals;
+                        timerWallPaper.Enabled = true;
+                        timerWallPaper.Start();
+                    })));
                 }
                 catch (Exception exception)
                 {
@@ -172,5 +186,16 @@ namespace OiuTools
             ms.SkinName = e.Item.Value.ToString();
         }
 
+        private void barBackUp_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var blegMM = BlegMM.Control as Controls.BlegMM;
+            blegMM?.BackToUp();
+        }
+
+        private void barBackHome_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var blegMM = BlegMM.Control as Controls.BlegMM;
+            blegMM ?.BackToHome();
+        }
     }
 }

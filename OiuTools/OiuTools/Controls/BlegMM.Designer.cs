@@ -29,47 +29,50 @@ namespace OiuTools.Controls
         /// </summary>
         private void InitializeComponent()
         {
-            this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.Root = new DevExpress.XtraLayout.LayoutControlGroup();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Root)).BeginInit();
+            this.mainPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.pagerControl1 = new OiuTools.Controls.PagerControl();
             this.SuspendLayout();
             // 
-            // layoutControl1
+            // mainPanel
             // 
-            this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.layoutControl1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControl1.Name = "layoutControl1";
-            this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(1182, 212, 650, 400);
-            this.layoutControl1.Root = this.Root;
-            this.layoutControl1.Size = new System.Drawing.Size(734, 504);
-            this.layoutControl1.TabIndex = 0;
-            this.layoutControl1.Text = "layoutControl1";
+            this.mainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.mainPanel.Location = new System.Drawing.Point(3, 0);
+            this.mainPanel.Name = "mainPanel";
+            this.mainPanel.Size = new System.Drawing.Size(920, 734);
+            this.mainPanel.TabIndex = 0;
             // 
-            // Root
+            // pagerControl1
             // 
-            this.Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
-            this.Root.GroupBordersVisible = false;
-            this.Root.Name = "Root";
-            this.Root.Size = new System.Drawing.Size(734, 504);
-            this.Root.TextVisible = false;
+            this.pagerControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pagerControl1.Location = new System.Drawing.Point(3, 740);
+            this.pagerControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.pagerControl1.Name = "pagerControl1";
+            this.pagerControl1.PageCount = 0;
+            this.pagerControl1.PageIndex = 0;
+            this.pagerControl1.PageSize = 10;
+            this.pagerControl1.RecordCount = ((long)(0));
+            this.pagerControl1.Size = new System.Drawing.Size(363, 38);
+            this.pagerControl1.TabIndex = 1;
             // 
             // BlegMM
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.layoutControl1);
+            this.Controls.Add(this.pagerControl1);
+            this.Controls.Add(this.mainPanel);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "BlegMM";
-            this.Size = new System.Drawing.Size(734, 504);
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Root)).EndInit();
+            this.Size = new System.Drawing.Size(926, 778);
+            this.Load += new System.EventHandler(this.BlegMM_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private DevExpress.XtraLayout.LayoutControl layoutControl1;
-        private DevExpress.XtraLayout.LayoutControlGroup Root;
+        private System.Windows.Forms.FlowLayoutPanel mainPanel;
+        private PagerControl pagerControl1;
     }
 }

@@ -25,8 +25,9 @@ namespace OiuTools.Controls
             lblName.Text = Model.Name;
         }
 
-        private void SingleApp_Click(object sender, EventArgs e)
+        private void SingleApp_Click(object sender, MouseEventArgs e)
         {
+            if (e.Button == MouseButtons.Right) return;
             Process.Start(Model.AppUrl);
         }
     }

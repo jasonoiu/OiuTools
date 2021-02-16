@@ -31,14 +31,14 @@ namespace OiuTools.Controls
         {
             this.components = new System.ComponentModel.Container();
             this.popupMenu1 = new DevExpress.XtraBars.PopupMenu(this.components);
-            this.fileDialog = new DevExpress.XtraEditors.XtraOpenFileDialog(this.components);
-            this.sp = new System.Windows.Forms.FlowLayoutPanel();
+            this.barAddApp = new DevExpress.XtraBars.BarButtonItem();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            this.barAddApp = new DevExpress.XtraBars.BarButtonItem();
+            this.fileDialog = new DevExpress.XtraEditors.XtraOpenFileDialog(this.components);
+            this.sp = new System.Windows.Forms.FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             this.SuspendLayout();
@@ -50,19 +50,12 @@ namespace OiuTools.Controls
             this.popupMenu1.Manager = this.barManager1;
             this.popupMenu1.Name = "popupMenu1";
             // 
-            // fileDialog
+            // barAddApp
             // 
-            this.fileDialog.DefaultExt = "exe";
-            this.fileDialog.Filter = "Exe files (*.exe)|*.exe";
-            // 
-            // sp
-            // 
-            this.sp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sp.Location = new System.Drawing.Point(0, 0);
-            this.sp.Name = "sp";
-            this.sp.Size = new System.Drawing.Size(547, 352);
-            this.sp.TabIndex = 0;
-            this.sp.MouseClick += new System.Windows.Forms.MouseEventHandler(this.flyoutPanelControl1_MouseClick);
+            this.barAddApp.Caption = "Add App";
+            this.barAddApp.Id = 0;
+            this.barAddApp.Name = "barAddApp";
+            this.barAddApp.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barAddApp_ItemClick);
             // 
             // barManager1
             // 
@@ -73,7 +66,7 @@ namespace OiuTools.Controls
             this.barManager1.Form = this;
             this.barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.barAddApp});
-            this.barManager1.MaxItemId = 1;
+            this.barManager1.MaxItemId = 2;
             // 
             // barDockControlTop
             // 
@@ -107,12 +100,20 @@ namespace OiuTools.Controls
             this.barDockControlRight.Manager = this.barManager1;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 352);
             // 
-            // barAddApp
+            // fileDialog
             // 
-            this.barAddApp.Caption = "Add App";
-            this.barAddApp.Id = 0;
-            this.barAddApp.Name = "barAddApp";
-            this.barAddApp.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barAddApp_ItemClick);
+            this.fileDialog.DefaultExt = "exe";
+            this.fileDialog.Filter = "Exe files (*.exe)|*.exe";
+            // 
+            // sp
+            // 
+            this.sp.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sp.Location = new System.Drawing.Point(0, 0);
+            this.sp.Name = "sp";
+            this.sp.Size = new System.Drawing.Size(547, 352);
+            this.sp.TabIndex = 0;
+            this.sp.MouseClick += new System.Windows.Forms.MouseEventHandler(this.flyoutPanelControl1_MouseClick);
+            
             // 
             // App
             // 
@@ -146,5 +147,6 @@ namespace OiuTools.Controls
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
+        
     }
 }

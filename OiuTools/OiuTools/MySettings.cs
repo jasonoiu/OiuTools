@@ -51,6 +51,11 @@ namespace OiuTools
         /// </summary>
         public string PaletteName { get; set; }
 
+        public int BlegMMPageSize { get; set; }
+        /// <summary>
+        /// 窗体坐标
+        /// </summary>
+        public Point LastLocation { get; set; }
 
         /// <summary>
         /// 点击关闭按钮的时候，是否退出程序。

@@ -1,7 +1,7 @@
 ﻿
 namespace OiuTools.Controls
 {
-    partial class SingleApp
+    partial class ImgControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -36,6 +36,8 @@ namespace OiuTools.Controls
             // 
             // lblName
             // 
+            this.lblName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblName.Appearance.Options.UseTextOptions = true;
             this.lblName.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.lblName.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
@@ -43,12 +45,13 @@ namespace OiuTools.Controls
             this.lblName.AutoEllipsis = true;
             this.lblName.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.lblName.ImageAlignToText = DevExpress.XtraEditors.ImageAlignToText.TopCenter;
-            this.lblName.Location = new System.Drawing.Point(3, 64);
+            this.lblName.Location = new System.Drawing.Point(0, 272);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(57, 34);
-            this.lblName.TabIndex = 1;
+            this.lblName.Size = new System.Drawing.Size(178, 25);
+            this.lblName.TabIndex = 3;
             this.lblName.Text = "App Name";
-            this.lblName.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SingleApp_Click);
+            this.lblName.MouseClick += new System.Windows.Forms.MouseEventHandler(this.FolderView_Click);
+            this.lblName.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.FolderView_MouseDoubleClick);
             // 
             // pic
             // 
@@ -56,19 +59,21 @@ namespace OiuTools.Controls
             this.pic.Name = "pic";
             this.pic.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
             this.pic.Properties.ShowMenu = false;
-            this.pic.Size = new System.Drawing.Size(60, 60);
-            this.pic.TabIndex = 0;
-            this.pic.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SingleApp_Click);
+            this.pic.Size = new System.Drawing.Size(175, 263);
+            this.pic.TabIndex = 2;
+            this.pic.MouseClick += new System.Windows.Forms.MouseEventHandler(this.FolderView_Click);
+            this.pic.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.FolderView_MouseDoubleClick);
             // 
-            // SingleApp
+            // ImgControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.pic);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Name = "SingleApp";
-            this.Size = new System.Drawing.Size(67, 101);
+            this.Name = "ImgControl";
+            this.Size = new System.Drawing.Size(178, 300);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.FolderView_Click);
+            this.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.FolderView_MouseDoubleClick);
             ((System.ComponentModel.ISupportInitialize)(this.pic.Properties)).EndInit();
             this.ResumeLayout(false);
 
@@ -76,7 +81,7 @@ namespace OiuTools.Controls
 
         #endregion
 
-        private DevExpress.XtraEditors.PictureEdit pic;
         private DevExpress.XtraEditors.LabelControl lblName;
+        private DevExpress.XtraEditors.PictureEdit pic;
     }
 }

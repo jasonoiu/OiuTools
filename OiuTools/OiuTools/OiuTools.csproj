@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.BonusSkins.v20.2" />
     <Reference Include="DevExpress.Data.Desktop.v20.2" />
@@ -93,6 +96,18 @@
     <Compile Include="Controls\Clock.Designer.cs">
       <DependentUpon>Clock.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ImgControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ImgControl.Designer.cs">
+      <DependentUpon>ImgControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PagerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\PagerControl.Designer.cs">
+      <DependentUpon>PagerControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SingleApp.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -120,6 +135,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Clock.resx">
       <DependentUpon>Clock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ImgControl.resx">
+      <DependentUpon>ImgControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\PagerControl.resx">
+      <DependentUpon>PagerControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\SingleApp.resx">
       <DependentUpon>SingleApp.cs</DependentUpon>
@@ -159,6 +180,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="favicon.ico" />
     <Content Include="refDll\ESBasic.dll" />
   </ItemGroup>
   <ItemGroup />
