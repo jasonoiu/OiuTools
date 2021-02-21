@@ -75,9 +75,20 @@ namespace OiuTools.Controls
         /// </summary>
         public ViewType ViewType { get; }
 
+        public ImgObj imgObj => (ImgObj) BaseObj;
+
         private void FolderView_Click(object sender, MouseEventArgs e)
         {
-            //this.BackColor = Color.PapayaWhip;
+            if (e.Button == MouseButtons.Right)
+            {
+                if (ViewType == ViewType.Folder)
+                {
+                    popFolderMenu.ShowPopup(this.PointToScreen(e.Location));
+                }else if (ViewType == ViewType.Image)
+                {
+                    popImgMenu.ShowPopup(this.PointToScreen(e.Location));
+                }
+            }
             FolderViewClicked?.Invoke(this);
         }
 
@@ -86,6 +97,65 @@ namespace OiuTools.Controls
             FolderViewMouseDoubleClicked?.Invoke(this, CurSortEnum, CurImgList);
         }
 
+        private void barAddToWallPaperList_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var folderObj = (FolderObj)BaseObj;
+            var lists = ss.AllImgFolderObjList.ImgObjList.Where(m =>
+                m.Folder == folderObj && m.IsLove);
+            foreach (var imgObj in lists)
+            {
+                if (ss.CurWallPagerList.Any(m => m.Id == imgObj.Id)) continue;
+                if (!imgObj.IsSetedSize)
+                {
+                    Tools.SetImageIsPcSize(imgObj);
+                }
 
+                ss.CurWallPagerList.Add(new WallPaper
+                {
+                    FileUrl = imgObj.FileUrl,
+                    Id = imgObj.Id,
+                    Name = imgObj.Name
+                });
+            }
+
+            ss.Save();
+        }
+
+        private void barRemoveFromWallPaper_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var folderObj = (FolderObj)BaseObj;
+            var lists = ss.AllImgFolderObjList.ImgObjList.Where(m =>
+                m.Folder == folderObj && m.IsLove);
+            foreach (var imgObj in lists)
+            {
+                ss.CurWallPagerList.RemoveAll(m => m.Id == imgObj.Id);
+            }
+
+            ss.Save();
+        }
+
+        private void barAddToNewWallPaperList_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var folderObj = (FolderObj)BaseObj;
+            var lists = ss.AllImgFolderObjList.ImgObjList.Where(m => m.Folder == folderObj);
+            ss.CurWallPagerList = new List<WallPaper>();
+            foreach (var imgObj in lists)
+            {
+                ss.CurWallPagerList.Add(new WallPaper
+                {
+                    FileUrl = imgObj.FileUrl,
+                    Id = imgObj.Id,
+                    Name = imgObj.Name
+                });
+            }
+
+            ss.Save();
+        }
+
+        private void barSetAsCover_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            imgObj.Folder.CoverImg = imgObj;
+            SystemSettings.Singleton.Save();
+        }
     }
 }

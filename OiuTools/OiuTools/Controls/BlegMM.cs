@@ -8,10 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BlegMM;
-using BlegMM.CControl;
 using BlegMM.Model;
 using DevExpress.XtraEditors;
 using ESBasic;
+using Util = OiuTools.Code.Util;
 
 namespace OiuTools.Controls
 {
@@ -37,11 +37,11 @@ namespace OiuTools.Controls
         /// <summary>
         /// 当前是否为文件夹视图
         /// </summary>
-        public bool CurIsFolderView => ((FolderView)mainPanel.Controls[0]).ViewType == ViewType.Folder;
+        public bool CurIsFolderView => ((ImgControl)mainPanel.Controls[0]).ViewType == ViewType.Folder;
         /// <summary>
         /// 当前的文件夹或图片对象
         /// </summary>
-        public FiBaseObj CurFiBaseObj => ((FolderView)mainPanel.Controls[0]).FiBaseObj;
+        public FiBaseObj CurFiBaseObj => ((ImgControl)mainPanel.Controls[0]).BaseObj;
         /// <summary>
         /// 上一次的PageSize
         /// </summary>
@@ -58,6 +58,7 @@ namespace OiuTools.Controls
 
         private void BlegMM_Load(object sender, EventArgs e)
         {
+            pagerControl1.EventPaging += PagerControl1_OnFolderOnPageChanged;
             initFolderListView();
         }
 
@@ -96,7 +97,6 @@ namespace OiuTools.Controls
                 addFolderViewToPanel(folderObj);
             }
 
-            pagerControl1.EventPaging += PagerControl1_OnFolderOnPageChanged;
             pagerControl1.RecordCount = list.Count();
             pagerControl1.Bind();
         }
@@ -123,7 +123,7 @@ namespace OiuTools.Controls
             LastPageIndex = pagerControl1.PageIndex;
             LastPageSize = pagerControl1.PageSize;
 
-            pagerControl1.PageSize = ss.PageSize;
+            pagerControl1.PageSize = pagerControl1.PageSize;
             pagerControl1.PageIndex = 1;
             pagerControl1.Tag = obj.BaseObj;
             pagerControl1.EventPaging -= PagerControl1_OnFolderOnPageChanged;
@@ -148,9 +148,9 @@ namespace OiuTools.Controls
                 .Take(pagerControl1.PageSize);
             foreach (var imgObj in list)
             {
-                var folderView = new FolderView(imgObj, ViewType.Image, sortEnum, allData);
+                var folderView = new ImgControl(imgObj, ViewType.Image, sortEnum, allData);
                 //folderView.FolderViewClicked += FolderViewOnFolderViewClicked;
-                folderView.FolderViewMouseDoubleClicked += Tools.ImgViewMouseDoubleClicked;
+                folderView.FolderViewMouseDoubleClicked += Util.ImgViewMouseDoubleClicked;
                 mainPanel.Controls.Add(folderView);
             }
             pagerControl1.RecordCount = allData.Count();
@@ -174,6 +174,7 @@ namespace OiuTools.Controls
                 pagerControl1.PageSize = LastPageSize;
                 pagerControl1.EventPaging -= PagerControl1_OnFolderOnPageChanged;
                 pagerControl1.EventPaging -= PagerControl1_OnImageOnPageChanged;
+                pagerControl1.EventPaging += PagerControl1_OnFolderOnPageChanged;
                 initFolderListView();
             }
             else
@@ -189,6 +190,7 @@ namespace OiuTools.Controls
             pagerControl1.PageSize = LastPageSize;
             pagerControl1.EventPaging -= PagerControl1_OnFolderOnPageChanged;
             pagerControl1.EventPaging -= PagerControl1_OnImageOnPageChanged;
+            pagerControl1.EventPaging += PagerControl1_OnFolderOnPageChanged;
             initFolderListView();
         }
 

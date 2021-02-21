@@ -24,6 +24,7 @@ namespace OiuTools
             ss = SystemSettings.Singleton;
             dm.View.QueryControl += OnQueryControl;
             timerWallPaper.Enabled = true;
+            MmReptile.Singleton.FolderScanFinished += Singleton_FolderScanFinishedEvent;
 
             if (ms.SkinName.IsNotNullOrEmpty())
             {
@@ -51,7 +52,20 @@ namespace OiuTools
 
         }
 
-        
+
+        /// <summary>
+        /// 蜘蛛引擎所有文件夹扫描完成时触发
+        /// </summary>
+        private void Singleton_FolderScanFinishedEvent()
+        {
+            barStatus.Caption = "Scan finished";
+            BeginInvoke(new Action((() =>
+            {
+                var blegMM = BlegMM.Control as Controls.BlegMM;
+                blegMM?.BackToHome();
+            })));
+        }
+
 
 
         private void OnQueryControl(object sender, QueryControlEventArgs e)
@@ -196,6 +210,36 @@ namespace OiuTools
         {
             var blegMM = BlegMM.Control as Controls.BlegMM;
             blegMM ?.BackToHome();
+        }
+
+        private void barScanStart_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            barStatus.Caption = "Start Scanning...";
+            new Action(MmReptile.Singleton.Start).BeginInvoke(null, null);
+
+        }
+
+        private void barBuildWallPaper_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            new Action((() =>
+            {
+                foreach (var folderObj in ss.AllImgFolderObjList.FolderObjList.Where(m =>
+                    m.FolderNo > ss.MinPeriod))
+                {
+                    foreach (var imgObj in ss.AllImgFolderObjList.ImgObjList.Where(m =>
+                        m.Folder == folderObj))
+                    {
+                        imgObj.buildThumbnailsAsyc();
+                    }
+
+                    this.BeginInvoke(new Action((() =>
+                    {
+                        barStatus.Caption = $"{folderObj.Name} 生成缩略图完成";
+                    })));
+                }
+
+                ss.Save();
+            })).BeginInvoke(null,null);
         }
     }
 }
