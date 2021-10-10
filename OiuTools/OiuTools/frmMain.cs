@@ -4,12 +4,17 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using BlegMM;
 using BlegMM.Model;
 using DevExpress.LookAndFeel;
 using DevExpress.XtraBars.Docking2010.Views;
+using DevExpress.XtraEditors;
+using OiuTools.Code;
+using OiuTools.Views;
 
 namespace OiuTools
 {
@@ -17,6 +22,36 @@ namespace OiuTools
     {
         private MySettings ms;
         private SystemSettings ss;
+
+        #region 公用方法
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool SetForegroundWindow(IntPtr hWnd);
+
+        /// <summary>
+        /// 获取并打开窗体
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="formName"></param>
+        /// <param name="func"></param>
+        public T GetAndOpenForm<T>(string formName, Func<T> func = null)
+            where T : Form, new()
+        {
+            var form = (T)Application.OpenForms[formName];
+            if (form != null)
+            {
+                SetForegroundWindow(form.Handle);
+                return form;
+            }
+            form = new T();
+            form.Show();
+            return form;
+        }
+
+        #endregion
+
+
         public frmMain()
         {
             InitializeComponent();
@@ -25,7 +60,7 @@ namespace OiuTools
             dm.View.QueryControl += OnQueryControl;
             timerWallPaper.Enabled = true;
             MmReptile.Singleton.FolderScanFinished += Singleton_FolderScanFinishedEvent;
-
+            
             if (ms.SkinName.IsNotNullOrEmpty())
             {
                 UserLookAndFeel.Default.SetSkinStyle(ms.SkinName, ms.PaletteName);
@@ -36,11 +71,21 @@ namespace OiuTools
                 Location = ms.LastLocation;
                 StartPosition = FormStartPosition.WindowsDefaultLocation;
             }
+
+            BackUpSettingEveryDay();
+
+            
+        }
+
+        private void BestLoveMM_WallPaperChanged()
+        {
+            BeginInvoke(new Action(timerWallPaperRestart));
         }
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            this.Size = ms.MainFormSize;
+            //this.Size = ms.MainFormSize;
+            this.Size = new Size(1469, 1400);
         }
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -51,6 +96,16 @@ namespace OiuTools
             ms.Save();
 
         }
+
+        void BackUpSettingEveryDay()
+        {
+            new Action((() =>
+            {
+                ss.BackUpFile();
+            })).BeginInvoke(null, null);
+        }
+
+
 
 
         /// <summary>
@@ -88,47 +143,68 @@ namespace OiuTools
 
                 try
                 {
-                    changeCurWallpaper();
-                    //ss.Save();
+                    var img1 = changeCurWallpaper();
                     var curImgObj = ss.CurWallPaper.getImgObj();
+                    if (curImgObj == null)
+                    {
+                        XtraMessageBox.Show($"curImgObj为null值");
+                        return;
+                    }
                     if (curImgObj.IsPcWallPaperSize)
                     {
                         Tools.SetWallPaper(curImgObj.FileUrl);
+                        img1.Dispose();
                     }
                     else
                     {
                         //合并2张竖屏壁纸
-                        var img1 = curImgObj.FileUrl.FixImgUrl().ToImage();
                         if (img1 == null)
                         {
-                            changeCurWallpaper();
+                            XtraMessageBox.Show($"img1为null值");
+                            return;
                         }
 
                         var img2 = getAnotherImgObj(curImgObj);
+
+                        if (img2 == null)
+                        {
+                            XtraMessageBox.Show($"img2为null值");
+                            return;
+                        }
+
                         var combinImg = Tools.CombinTwoImage(img1, img2);
+
+                        if (combinImg == null)
+                        {
+                            XtraMessageBox.Show($"combinImg为null值");
+                            return;
+                        }
+
                         Tools.SetWallPaper(combinImg);
 
                     }
 
                     curImgObj = null;
-                    BeginInvoke(new Action((() =>
-                    {
-                        timerWallPaper.Stop();
-                        timerWallPaper.Enabled = false;
-                        timerWallPaper.Interval = ss.Intervals;
-                        timerWallPaper.Enabled = true;
-                        timerWallPaper.Start();
-                    })));
+                    BeginInvoke(new Action(timerWallPaperRestart));
                 }
                 catch (Exception exception)
                 {
-                    //MessageBoxEx.Show(this, exception.Message);
+                    XtraMessageBox.Show(this, exception.Message);
                     //throw;
                 }
             })).BeginInvoke(null, null);
         }
 
-        void changeCurWallpaper()
+        void timerWallPaperRestart()
+        {
+            timerWallPaper.Stop();
+            timerWallPaper.Enabled = false;
+            timerWallPaper.Interval = ss.Intervals;
+            timerWallPaper.Enabled = true;
+            timerWallPaper.Start();
+        }
+
+        Image changeCurWallpaper()
         {
             var randomMax = ss.CurWallPagerList.Count - 1;
 
@@ -144,6 +220,14 @@ namespace OiuTools
                     m.Id == ss.CurWallPaper.Id);
                 ss.CurWallPaper = ss.CurWallPagerList[getRandomIndex(randomMax, index)];
             }
+
+            var img = ss.CurWallPaper.getImgObj().FileUrl.FixImgUrl().ToImage();
+            if (img == null)
+            {
+                return changeCurWallpaper();
+            }
+
+            return img;
         }
 
         /// <summary>
@@ -240,6 +324,48 @@ namespace OiuTools
 
                 ss.Save();
             })).BeginInvoke(null,null);
+        }
+
+        private void barSystemSetting_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var frmConfig = GetAndOpenForm<frmConfig>("frmConfig");
+            frmConfig.WallPaperIntervalChanged += FrmConfig_WallPaperIntervalChanged;
+        }
+
+        private void FrmConfig_WallPaperIntervalChanged()
+        {
+            timerWallPaperRestart();
+        }
+
+        private void tabbedView1_ControlLoaded(object sender, DeferredControlLoadEventArgs e)
+        {
+            
+        }
+
+        private void tabbedView1_ControlShown(object sender, DeferredControlLoadEventArgs e)
+        {
+            new Action((() =>
+            {
+                Thread.Sleep(1000 * 3);
+
+                var bestLoveMM = BestLoveMM.Control as Controls.BestLoveMM;
+                bestLoveMM.WallPaperChanged += BestLoveMM_WallPaperChanged;
+
+                var blegMM = BlegMM.Control as Controls.BlegMM;
+                blegMM.FolderRecanThumbnailsBuildFinished += BlegMM_FolderRecanThumbnailsBuildFinished;
+                blegMM.FolderAllImagesInited += BlegMM_FolderRecanThumbnailsBuildFinished;
+
+            })).BeginInvoke(null, null);
+        }
+
+        
+
+        private void BlegMM_FolderRecanThumbnailsBuildFinished(string message)
+        {
+            this.BeginInvoke(new Action((() =>
+            {
+                barStatus.Caption = message;
+            })));
         }
     }
 }

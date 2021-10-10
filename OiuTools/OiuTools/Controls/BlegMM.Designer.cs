@@ -38,33 +38,34 @@ namespace OiuTools.Controls
             this.mainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.mainPanel.Location = new System.Drawing.Point(3, 0);
+            this.mainPanel.Location = new System.Drawing.Point(4, 0);
+            this.mainPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(920, 734);
+            this.mainPanel.Size = new System.Drawing.Size(1183, 1028);
             this.mainPanel.TabIndex = 0;
             // 
             // pagerControl1
             // 
             this.pagerControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.pagerControl1.Location = new System.Drawing.Point(3, 740);
-            this.pagerControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.pagerControl1.Location = new System.Drawing.Point(4, 1036);
+            this.pagerControl1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.pagerControl1.Name = "pagerControl1";
             this.pagerControl1.PageCount = 0;
             this.pagerControl1.PageIndex = 0;
             this.pagerControl1.PageSize = 10;
             this.pagerControl1.RecordCount = ((long)(0));
-            this.pagerControl1.Size = new System.Drawing.Size(363, 38);
+            this.pagerControl1.Size = new System.Drawing.Size(604, 53);
             this.pagerControl1.TabIndex = 1;
             // 
             // BlegMM
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pagerControl1);
             this.Controls.Add(this.mainPanel);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.Name = "BlegMM";
-            this.Size = new System.Drawing.Size(926, 778);
+            this.Size = new System.Drawing.Size(1191, 1089);
             this.Load += new System.EventHandler(this.BlegMM_Load);
             this.ResumeLayout(false);
 

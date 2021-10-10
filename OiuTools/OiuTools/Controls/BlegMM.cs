@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +34,14 @@ namespace OiuTools.Controls
             
         }
 
+        /// <summary>
+        /// 文件夹重新扫描后生成单个缩略图完成
+        /// </summary>
+        public event CbGeneric<string> FolderRecanThumbnailsBuildFinished;
+        /// <summary>
+        /// 文件夹所有图片初始化完成
+        /// </summary>
+        public event CbGeneric<string> FolderAllImagesInited;
 
         /// <summary>
         /// 当前是否为文件夹视图
@@ -110,8 +119,15 @@ namespace OiuTools.Controls
             var folderView = new ImgControl(folderObj, ViewType.Folder);
             //folderView.FolderViewClicked += FolderViewOnFolderViewClicked;
             folderView.FolderViewMouseDoubleClicked += FolderViewMouseDoubleClicked;
+            folderView.RescanThumbnailsBuildFinished += FolderView_RescanThumbnailsBuildFinished; ;
             mainPanel.Controls.Add(folderView);
         }
+
+        private void FolderView_RescanThumbnailsBuildFinished(string message)
+        {
+            FolderRecanThumbnailsBuildFinished?.Invoke(message);
+        }
+
         private void PagerControl1_OnFolderOnPageChanged(EventPagingArg e)
         {
             initFolderListView();
@@ -130,7 +146,25 @@ namespace OiuTools.Controls
             pagerControl1.EventPaging -= PagerControl1_OnImageOnPageChanged;
             pagerControl1.EventPaging += PagerControl1_OnImageOnPageChanged;
             initImageListView(obj.BaseObj as FolderObj, sortEnum);
+
+            PlaySexMusic(); 
         }
+
+
+
+        void PlaySexMusic()
+        {
+            if (!ms.IsPlayMusic) return;
+            new Action(() =>
+            {
+                var url = $@"{AppDomain.CurrentDomain.BaseDirectory}music\";
+                var files = Directory.EnumerateFiles(url, "*.wav");
+                var num = Tools.getRandomNum(1, 0, files.Count() - 1)[0];
+                Util.PlayMusic(files.ElementAt(num));
+
+            }).BeginInvoke(null, null);
+        }
+
 
         
 
@@ -155,6 +189,8 @@ namespace OiuTools.Controls
             }
             pagerControl1.RecordCount = allData.Count();
             pagerControl1.Bind();
+
+            FolderAllImagesInited?.Invoke($"文件夹{folderObj.Name}图片总数量：{pagerControl1.RecordCount}");
         }
 
         private void PagerControl1_OnImageOnPageChanged(EventPagingArg e)

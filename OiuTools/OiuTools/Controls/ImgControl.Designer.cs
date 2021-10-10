@@ -41,8 +41,10 @@ namespace OiuTools.Controls
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            this.popImgMenu = new DevExpress.XtraBars.PopupMenu(this.components);
             this.barSetAsCover = new DevExpress.XtraBars.BarButtonItem();
+            this.barSetBestLoveMM = new DevExpress.XtraBars.BarButtonItem();
+            this.popImgMenu = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.barRescan = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.pic.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popFolderMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
@@ -57,12 +59,12 @@ namespace OiuTools.Controls
             this.lblName.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.lblName.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
             this.lblName.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.lblName.AutoEllipsis = true;
-            this.lblName.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.lblName.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Vertical;
             this.lblName.ImageAlignToText = DevExpress.XtraEditors.ImageAlignToText.TopCenter;
-            this.lblName.Location = new System.Drawing.Point(0, 272);
+            this.lblName.Location = new System.Drawing.Point(5, 271);
+            this.lblName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(178, 25);
+            this.lblName.Size = new System.Drawing.Size(175, 25);
             this.lblName.TabIndex = 3;
             this.lblName.Text = "App Name";
             this.lblName.MouseClick += new System.Windows.Forms.MouseEventHandler(this.FolderView_Click);
@@ -70,7 +72,8 @@ namespace OiuTools.Controls
             // 
             // pic
             // 
-            this.pic.Location = new System.Drawing.Point(3, 3);
+            this.pic.Location = new System.Drawing.Point(4, 5);
+            this.pic.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pic.Name = "pic";
             this.pic.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
             this.pic.Properties.ShowMenu = false;
@@ -84,7 +87,8 @@ namespace OiuTools.Controls
             this.popFolderMenu.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.barAddToWallPaperList),
             new DevExpress.XtraBars.LinkPersistInfo(this.barAddToNewWallPaperList),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barRemoveFromWallPaper)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.barRemoveFromWallPaper),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barRescan)});
             this.popFolderMenu.Manager = this.barManager1;
             this.popFolderMenu.Name = "popFolderMenu";
             // 
@@ -120,8 +124,10 @@ namespace OiuTools.Controls
             this.barAddToWallPaperList,
             this.barRemoveFromWallPaper,
             this.barAddToNewWallPaperList,
-            this.barSetAsCover});
-            this.barManager1.MaxItemId = 4;
+            this.barSetAsCover,
+            this.barSetBestLoveMM,
+            this.barRescan});
+            this.barManager1.MaxItemId = 6;
             // 
             // barDockControlTop
             // 
@@ -129,15 +135,17 @@ namespace OiuTools.Controls
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManager1;
-            this.barDockControlTop.Size = new System.Drawing.Size(178, 0);
+            this.barDockControlTop.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.barDockControlTop.Size = new System.Drawing.Size(184, 0);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 300);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 327);
             this.barDockControlBottom.Manager = this.barManager1;
-            this.barDockControlBottom.Size = new System.Drawing.Size(178, 0);
+            this.barDockControlBottom.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.barDockControlBottom.Size = new System.Drawing.Size(184, 0);
             // 
             // barDockControlLeft
             // 
@@ -145,22 +153,17 @@ namespace OiuTools.Controls
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 0);
             this.barDockControlLeft.Manager = this.barManager1;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 300);
+            this.barDockControlLeft.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 327);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(178, 0);
+            this.barDockControlRight.Location = new System.Drawing.Point(184, 0);
             this.barDockControlRight.Manager = this.barManager1;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 300);
-            // 
-            // popImgMenu
-            // 
-            this.popImgMenu.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.barSetAsCover)});
-            this.popImgMenu.Manager = this.barManager1;
-            this.popImgMenu.Name = "popImgMenu";
+            this.barDockControlRight.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 327);
             // 
             // barSetAsCover
             // 
@@ -169,9 +172,31 @@ namespace OiuTools.Controls
             this.barSetAsCover.Name = "barSetAsCover";
             this.barSetAsCover.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barSetAsCover_ItemClick);
             // 
+            // barSetBestLoveMM
+            // 
+            this.barSetBestLoveMM.Caption = "Set BestLoveMM";
+            this.barSetBestLoveMM.Id = 4;
+            this.barSetBestLoveMM.Name = "barSetBestLoveMM";
+            this.barSetBestLoveMM.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barSetBestLoveMM_ItemClick);
+            // 
+            // popImgMenu
+            // 
+            this.popImgMenu.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSetAsCover),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSetBestLoveMM)});
+            this.popImgMenu.Manager = this.barManager1;
+            this.popImgMenu.Name = "popImgMenu";
+            // 
+            // barRescan
+            // 
+            this.barRescan.Caption = "Rescan";
+            this.barRescan.Id = 5;
+            this.barRescan.Name = "barRescan";
+            this.barRescan.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barRescan_ItemClick);
+            // 
             // ImgControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.pic);
@@ -179,8 +204,9 @@ namespace OiuTools.Controls
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "ImgControl";
-            this.Size = new System.Drawing.Size(178, 300);
+            this.Size = new System.Drawing.Size(184, 327);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.FolderView_Click);
             this.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.FolderView_MouseDoubleClick);
             ((System.ComponentModel.ISupportInitialize)(this.pic.Properties)).EndInit();
@@ -207,5 +233,7 @@ namespace OiuTools.Controls
         private DevExpress.XtraBars.BarButtonItem barAddToNewWallPaperList;
         private DevExpress.XtraBars.BarButtonItem barSetAsCover;
         private DevExpress.XtraBars.PopupMenu popImgMenu;
+        private DevExpress.XtraBars.BarButtonItem barSetBestLoveMM;
+        private DevExpress.XtraBars.BarButtonItem barRescan;
     }
 }

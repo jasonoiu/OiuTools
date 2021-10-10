@@ -163,6 +163,7 @@ namespace OiuTools.Controls
             }
             var front = 1;
             var w = 28; //页码等距
+            var yPoint = 7;
             //设置页码
             //设置位置
             var visibleCount = 0;
@@ -188,7 +189,7 @@ namespace OiuTools.Controls
                     c.Visible = true;
                     visibleCount++;
 
-                    c.Location = new Point(w * (1 + i) + front, 3);
+                    c.Location = new Point(w * (1 + i) + front, yPoint);
                     if (lst[i] == PageIndex || (PageIndex == 0 && lst[i] == 1))
                     {
                         c.ForeColor = Color.SteelBlue;
@@ -201,9 +202,11 @@ namespace OiuTools.Controls
                 }
             }
 
-            this.btnNextPage.Location = new Point(w * (1 + visibleCount) + front, 3);
-            this.lblCountPage.Location = new Point(w * (2 + visibleCount) + front, 7);
+            this.btnNextPage.Location = new Point(w * (1 + visibleCount) + front, yPoint);
+            this.lblCountPage.Location = new Point(w * (2 + visibleCount) + front, yPoint+4);
 
+            this.txtPageIndex.Location = new Point(this.lblCountPage.Location.X + this.lblCountPage.Width + 15, yPoint);
+            this.btnGO.Location = new Point(this.txtPageIndex.Location.X + this.txtPageIndex.Width + 3, yPoint);
         }
 
         #endregion
@@ -218,6 +221,7 @@ namespace OiuTools.Controls
         {
             if (PageSize == 0)
             {
+                PageSize = 18;
                 this.PageCount = 0;
             }
             var pageCount = (int)RecordCount / PageSize;
@@ -296,6 +300,15 @@ namespace OiuTools.Controls
             }
 
 
+        }
+
+        private void btnGO_Click(object sender, EventArgs e)
+        {
+            var pageIndex = txtPageIndex.Text.Trim().ToInt();
+            if (pageIndex <= 0) return;
+            PageIndex = pageIndex;
+            this.Bind();
+            this.EventPaging?.Invoke(new EventPagingArg(this.PageIndex, this.Tag));
         }
         #endregion
 

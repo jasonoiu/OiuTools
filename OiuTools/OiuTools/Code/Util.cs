@@ -13,5 +13,22 @@ namespace OiuTools.Code
             form.Show();
             form.Focus();
         }
+
+
+        /// <summary>
+        /// 播放音乐
+        /// </summary>
+        /// <param name="musicUrl"></param>
+        public static void PlayMusic(string musicUrl)
+        {
+            System.Media.SoundPlayer player = new System.Media.SoundPlayer();
+            player.SoundLocation = musicUrl;
+            player.LoadAsync();
+            player.PlaySync();
+        }
+
+
+
+
     }
 }

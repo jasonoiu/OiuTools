@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,9 +37,9 @@ namespace OiuTools.Controls
         public event CbGeneric<ImgControl> RemoveFromCurWallPaperList;
 
         /// <summary>
-        /// 从最爱美女列表中移除时发生
+        /// 重新扫描后生成单个缩略图完成
         /// </summary>
-        public event CbGeneric<ImgControl> RemoveFromTopLoveMMList;
+        public event CbGeneric<string> RescanThumbnailsBuildFinished;
 
         public ImgControl(FiBaseObj fiBaseObj, ViewType viewType, SortEnum sortEnum = SortEnum.AddTimeAsc,
             IEnumerable<ImgObj> list = null)
@@ -137,7 +138,7 @@ namespace OiuTools.Controls
         private void barAddToNewWallPaperList_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             var folderObj = (FolderObj)BaseObj;
-            var lists = ss.AllImgFolderObjList.ImgObjList.Where(m => m.Folder == folderObj);
+            var lists = ss.AllImgFolderObjList.ImgObjList.Where(m => m.Folder == folderObj && m.IsLove);
             ss.CurWallPagerList = new List<WallPaper>();
             foreach (var imgObj in lists)
             {
@@ -156,6 +157,68 @@ namespace OiuTools.Controls
         {
             imgObj.Folder.CoverImg = imgObj;
             SystemSettings.Singleton.Save();
+        }
+
+        private void barSetBestLoveMM_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (ss.BestLoveMMWallPaperLists.Exists(m => m.Id == imgObj.Id)) return;
+
+            ss.AddWallPaperToBestLoveMM(new WallPaper
+            {
+                Id = imgObj.Id, FileUrl = imgObj.FileUrl, Name = imgObj.Name
+            });
+        }
+
+        private void barRescan_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var folderObj = (FolderObj)BaseObj;
+            var lists = ss.AllImgFolderObjList.ImgObjList.Where(m => m.Folder == folderObj).ToList();
+            var files = Directory.GetFileSystemEntries(folderObj.FolderUrl);
+            var i = 0;
+            foreach (var fs in files)
+            {
+                if(lists.Any(m=>m.FileUrl.Equals(fs, StringComparison.OrdinalIgnoreCase))) continue;
+                //添加到集合
+                var imgObj = new ImgObj
+                {
+                    AddTime = DateTime.Now,
+                    FileUrl = fs,
+                    Name = fs.Substring(fs.LastIndexOf(@"\", StringComparison.Ordinal) + 1, 8),
+                    Folder = folderObj,
+                    Id = Guid.NewGuid()
+                };
+
+                //size
+                var img = fs.ToImage();
+                if (img == null) continue;
+                if (img.Width > img.Height) imgObj.IsPcWallPaperSize = true;
+                imgObj.IsSetedSize = true;
+                img.Dispose();
+
+                SystemSettings.Singleton.AllImgFolderObjList.ImgObjList.Add(imgObj);
+
+                //新开线程生成壁纸
+                new Action((() =>
+                {
+                    imgObj.buildThumbnailsAsyc();
+                    this.BeginInvoke(new Action((() =>
+                    {
+                        RescanThumbnailsBuildFinished?.Invoke($"{folderObj.Name}的壁纸{imgObj.Name}生成缩略图完成");
+                    })));
+                    
+                })).BeginInvoke(null, null);
+
+                i++;
+            }
+            if(i>0)
+            {
+                ss.Save();
+            }
+            else
+            {
+                RescanThumbnailsBuildFinished?.Invoke($"{folderObj.Name}没有新的壁纸");
+            }
+
         }
     }
 }

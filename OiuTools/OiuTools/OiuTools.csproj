@@ -80,6 +80,12 @@
     <Compile Include="Controls\App.Designer.cs">
       <DependentUpon>App.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\BestLoveMM.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\BestLoveMM.Designer.cs">
+      <DependentUpon>BestLoveMM.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\BlegMM.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -132,6 +138,12 @@
     <Compile Include="Views\BaseForm.Designer.cs">
       <DependentUpon>BaseForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\frmConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frmConfig.Designer.cs">
+      <DependentUpon>frmConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\frmImgShow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -140,6 +152,9 @@
     </Compile>
     <EmbeddedResource Include="Controls\App.resx">
       <DependentUpon>App.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\BestLoveMM.resx">
+      <DependentUpon>BestLoveMM.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\BlegMM.resx">
       <DependentUpon>BlegMM.cs</DependentUpon>
@@ -176,6 +191,9 @@
     <EmbeddedResource Include="Views\BaseForm.resx">
       <DependentUpon>BaseForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\frmConfig.resx">
+      <DependentUpon>frmConfig.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\frmImgShow.resx">
       <DependentUpon>frmImgShow.cs</DependentUpon>
     </EmbeddedResource>
@@ -197,6 +215,10 @@
     <ProjectReference Include="..\..\..\BlegMMOld\BlegMM\BlegMM.csproj">
       <Project>{a6d9b118-23cb-406c-9c01-eeb7fd256dbd}</Project>
       <Name>BlegMM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\BlegMMOld\PublicLibrary\PublicLibrary.csproj">
+      <Project>{2799b34b-87a0-418e-a8c6-8645c34e8b80}</Project>
+      <Name>PublicLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

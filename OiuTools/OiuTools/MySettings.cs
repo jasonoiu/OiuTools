@@ -66,7 +66,12 @@ namespace OiuTools
         /// 随系统自动启动
         /// </summary>
         public bool AutoStartUp { get; set; } = false;
-        
+
+        /// <summary>
+        /// 是否播放音乐
+        /// </summary>
+        public bool IsPlayMusic { get; set; } = false;
+
 
         #region MainFormSize
         private Size mainFormSize = new Size(958, 770);
