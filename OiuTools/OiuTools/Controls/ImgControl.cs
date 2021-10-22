@@ -220,5 +220,12 @@ namespace OiuTools.Controls
             }
 
         }
+
+        private void barSetasWallpaper_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Tools.SetWallPaper(imgObj.FileUrl);
+        }
+
+
     }
 }

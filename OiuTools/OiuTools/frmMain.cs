@@ -13,6 +13,7 @@ using BlegMM.Model;
 using DevExpress.LookAndFeel;
 using DevExpress.XtraBars.Docking2010.Views;
 using DevExpress.XtraEditors;
+using DevExpress.XtraSplashScreen;
 using OiuTools.Code;
 using OiuTools.Views;
 
@@ -55,6 +56,7 @@ namespace OiuTools
         public frmMain()
         {
             InitializeComponent();
+            
             ms = MySettings.Singleton;
             ss = SystemSettings.Singleton;
             dm.View.QueryControl += OnQueryControl;
@@ -77,6 +79,11 @@ namespace OiuTools
             
         }
 
+
+        
+
+
+
         private void BestLoveMM_WallPaperChanged()
         {
             BeginInvoke(new Action(timerWallPaperRestart));
@@ -84,8 +91,14 @@ namespace OiuTools
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            //this.Size = ms.MainFormSize;
-            this.Size = new Size(1469, 1400);
+            if (ms.MainFormSize.Width < 1334)
+            {
+                this.Size = new Size(1334, 1224);
+            }
+            else
+            {
+                this.Size = ms.MainFormSize;
+            }
         }
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -347,7 +360,7 @@ namespace OiuTools
             new Action((() =>
             {
                 Thread.Sleep(1000 * 3);
-
+                
                 var bestLoveMM = BestLoveMM.Control as Controls.BestLoveMM;
                 bestLoveMM.WallPaperChanged += BestLoveMM_WallPaperChanged;
 

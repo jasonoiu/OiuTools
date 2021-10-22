@@ -150,6 +150,12 @@
     <Compile Include="Views\frmImgShow.Designer.cs">
       <DependentUpon>frmImgShow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\frmSplashScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frmSplashScreen.Designer.cs">
+      <DependentUpon>frmSplashScreen.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Controls\App.resx">
       <DependentUpon>App.cs</DependentUpon>
     </EmbeddedResource>
@@ -196,6 +202,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\frmImgShow.resx">
       <DependentUpon>frmImgShow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\frmSplashScreen.resx">
+      <DependentUpon>frmSplashScreen.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
     <None Include="Properties\Settings.settings">

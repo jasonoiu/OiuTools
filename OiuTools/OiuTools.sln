@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlegMM", "..\..\BlegMMOld\B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PublicLibrary", "..\..\BlegMMOld\PublicLibrary\PublicLibrary.csproj", "{2799B34B-87A0-418E-A8C6-8645C34E8B80}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlegMMAPP", "BlegMMAPP\BlegMMAPP.csproj", "{410CBD72-B257-4922-94C2-F7D9C83F7B9D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,12 @@ Global
 		{2799B34B-87A0-418E-A8C6-8645C34E8B80}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2799B34B-87A0-418E-A8C6-8645C34E8B80}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2799B34B-87A0-418E-A8C6-8645C34E8B80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{410CBD72-B257-4922-94C2-F7D9C83F7B9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{410CBD72-B257-4922-94C2-F7D9C83F7B9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{410CBD72-B257-4922-94C2-F7D9C83F7B9D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{410CBD72-B257-4922-94C2-F7D9C83F7B9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{410CBD72-B257-4922-94C2-F7D9C83F7B9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{410CBD72-B257-4922-94C2-F7D9C83F7B9D}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
