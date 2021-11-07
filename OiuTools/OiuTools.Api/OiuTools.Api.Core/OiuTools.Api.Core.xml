@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>OiuTools.Api.Core</name>
+    </assembly>
+    <members>
+        <member name="P:OiuTools.Api.Core.Entity.BeautyModel.CoverId">
+            <summary>
+            封面id
+            </summary>
+        </member>
+        <member name="T:OiuTools.Api.Core.Entity.PhotoAlbums">
+            <summary>
+            写真集
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,23 @@
+﻿{
+  "SpecificationDocumentSettings": {
+    "DocumentTitle": "OiuTools API",
+    "GroupOpenApiInfos": [
+      {
+        "Group": "Default",
+        "Title": "OiuTools API",
+        "Description": "提供自用的工具类API",
+        "Version": "1.0.0",
+        "TermsOfService": "https://furion.pro",
+        "Contact": {
+          "Name": "Jason",
+          "Url": "https://gitee.com/monksoul",
+          "Email": "jason@outlook.com"
+        },
+        "License": {
+          "Name": "Apache-2.0",
+          "Url": "https://gitee.com/dotnetchina/Furion/blob/rc1/LICENSE"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <NoWarn>1701;1702;1591</NoWarn>
+    <DocumentationFile>OiuTools.Api.Web.Core.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="OiuTools.Api.Web.Core.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OiuTools.Api.Application\OiuTools.Api.Application.csproj" />
+    <ProjectReference Include="..\OiuTools.Api.Database.Migrations\OiuTools.Api.Database.Migrations.csproj" />
+  </ItemGroup>
+
+</Project>

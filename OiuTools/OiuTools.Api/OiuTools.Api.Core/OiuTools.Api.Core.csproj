@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <NoWarn>1701;1702;1591</NoWarn>
+    <DocumentationFile>OiuTools.Api.Core.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="OiuTools.Api.Core.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Furion" Version="2.20.0" />
+    <PackageReference Include="Furion.Extras.Authentication.JwtBearer" Version="2.20.0" />
+    <PackageReference Include="Furion.Extras.ObjectMapper.Mapster" Version="2.20.0" />
+  </ItemGroup>
+
+</Project>
