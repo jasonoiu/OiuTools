@@ -112,7 +112,7 @@ namespace OiuTools
                 }
             }
 
-            ProcessTempTask();
+            //ProcessTempTask();
 
         }
 
@@ -130,22 +130,18 @@ namespace OiuTools
         /// </summary>
         void ProcessTempTask()
         {
-            var delMinPeriod = 820;
-            if (!ss.AllImgFolderObjList.FolderObjList.Any(m=>m.FolderNo<=delMinPeriod)) return;
             
             new Action((() =>
             {
 
                 try
                 {
-                    var copyFoldersList = ss.AllImgFolderObjList.FolderObjList.Where(m => m.FolderNo <= delMinPeriod)
-                        .ToList().DeepCopyWithBinarySerialize();
-                    foreach (var folderObj in copyFoldersList)
+                    foreach (var imgObj in ss.AllImgFolderObjList.ImgObjList)
                     {
-                        ss.DelFolder(folderObj);
+                        if(imgObj.ThumbnailsUrl.IsNullOrEmpty() || imgObj.ThumbnailsUrl.StartsWith(@"c:", StringComparison.OrdinalIgnoreCase)) continue;
+                        imgObj.ThumbnailsUrl = @"c" + imgObj.ThumbnailsUrl.Substring(1);
                     }
                     ss.Save();
-                    BlegMmBackToHome();
                     XMessage.Show("文件夹批量删除完成！");
                 }
                 catch (Exception e)
@@ -555,5 +551,17 @@ namespace OiuTools
                 Id = Guid.NewGuid(), Lists = new List<WallPaper>(), Name = name
             });
         }
+
+        private void barDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var blegMM = BlegMM.Control as Controls.BlegMM;
+            if (XMessage.Confirm($@"您确定要删除这些{(blegMM.CurIsFolderView ? "文件夹" : "美女图片")}吗？") == DialogResult.Yes)
+            {
+                blegMM.DeleteByCurSelected();
+            }
+            
+        }
+
+
     }
 }

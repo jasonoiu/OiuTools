@@ -12,6 +12,7 @@ using BlegMM;
 using BlegMM.Model;
 using DevExpress.XtraEditors;
 using ESBasic;
+using OiuTools.Code;
 using Util = OiuTools.Code.Util;
 
 namespace OiuTools.Controls
@@ -101,9 +102,12 @@ namespace OiuTools.Controls
                     break;
             }
             var pageList = list.Skip((pagerControl1.PageIndex - 1) * pagerControl1.PageSize).Take(pagerControl1.PageSize);
+
+            var i = 0;
             foreach (var folderObj in pageList)
             {
-                addFolderViewToPanel(folderObj);
+                addFolderViewToPanel(folderObj, i);
+                i++;
             }
 
             pagerControl1.RecordCount = list.Count();
@@ -114,15 +118,128 @@ namespace OiuTools.Controls
         /// 向主界面中添加文件夹
         /// </summary>
         /// <param name="folderObj"></param>
-        void addFolderViewToPanel(FolderObj folderObj)
+        void addFolderViewToPanel(FolderObj folderObj, int index = 0)
         {
             var folderView = new ImgControl(folderObj, ViewType.Folder);
-            //folderView.FolderViewClicked += FolderViewOnFolderViewClicked;
+            folderView.FolderViewClicked += FolderView_FolderViewClicked;
             folderView.FolderViewMouseDoubleClicked += FolderViewMouseDoubleClicked;
             folderView.RescanThumbnailsBuildFinished += FolderView_RescanThumbnailsBuildFinished;
             folderView.FolderDeleted += FolderView_FolderDeleted;
+            folderView.Tag = index;
             mainPanel.Controls.Add(folderView);
         }
+
+        /// <summary>
+        /// 文件夹点击事件处理
+        /// </summary>
+        /// <param name="imgControl"></param>
+        /// <param name="obj2"></param>
+        private void FolderView_FolderViewClicked(ImgControl imgControl, Keys? key)
+        {
+            if (key == null) //没有按组合键，则为单选
+            {
+                foreach (Control control in mainPanel.Controls)
+                {
+                    if (control is ImgControl ic)
+                    {
+                        if (ic != imgControl)
+                        {
+                            ic.UnSelected();
+                        }
+                    }
+                }
+            }else if (key == Keys.Shift)
+            {
+                var curIndex = imgControl.Tag.ToInt();
+                var otherIndex = -1;
+                foreach (Control control in mainPanel.Controls)
+                {
+                    if (control is ImgControl ic)
+                    {
+                        if (ic != imgControl && ic.IsSelected)
+                        {
+                            otherIndex = ic.Tag.ToInt();
+                            break;
+                        }
+                    }
+                }
+
+                if (otherIndex == -1) return;
+                //根据大小确定顺序
+                var begin = 0;
+                var end = 0;
+                if (otherIndex < curIndex)
+                {
+                    begin = otherIndex;
+                    end = curIndex;
+                }
+                else
+                {
+                    begin = curIndex;
+                    end = otherIndex;
+                }
+                foreach (Control control in mainPanel.Controls)
+                {
+                    if (control is ImgControl ic)
+                    {
+                        var i = ic.Tag.ToInt();
+                        if (i >= begin && i <= end)
+                        {
+                            ic.Selected();
+                        }
+                    }
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// 删除当前所选择的文件夹或图片
+        /// </summary>
+        public void DeleteByCurSelected()
+        {
+            try
+            {
+                foreach (Control control in mainPanel.Controls)
+                {
+                    if (control is ImgControl ic)
+                    {
+                        if (!ic.IsSelected) continue;
+
+                        if (CurIsFolderView) //删除文件夹
+                        {
+                            ss.DelFolder(ic.BaseObj as FolderObj);
+                        }
+                        else  //删除文件
+                        {
+                            ss.DelImgObj(ic.BaseObj as ImgObj);
+                        }
+                    }
+                }
+                ss.Save();
+
+                if (CurIsFolderView)
+                {
+                    initFolderListView();
+                }
+                else
+                {
+                    initImageListView(pagerControl1.Tag as FolderObj);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                ss.Save();
+                XMessage.Show(ex.Message);
+            }
+            
+        }
+
+
+
+
+
 
         /// <summary>
         /// 当文件夹被删除后的回调
@@ -200,12 +317,16 @@ namespace OiuTools.Controls
             var list = allData
                 .Skip((pagerControl1.PageIndex - 1) * pagerControl1.PageSize)
                 .Take(pagerControl1.PageSize);
+
+            var i = 0;
             foreach (var imgObj in list)
             {
                 var folderView = new ImgControl(imgObj, ViewType.Image, sortEnum, allData);
-                //folderView.FolderViewClicked += FolderViewOnFolderViewClicked;
+                folderView.FolderViewClicked += FolderView_FolderViewClicked;
                 folderView.FolderViewMouseDoubleClicked += Util.ImgViewMouseDoubleClicked;
+                folderView.Tag = i;
                 mainPanel.Controls.Add(folderView);
+                i++;
             }
             pagerControl1.RecordCount = allData.Count();
             pagerControl1.Bind();

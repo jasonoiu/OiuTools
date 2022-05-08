@@ -94,6 +94,7 @@ namespace OiuTools.Views
             {
                 SystemSettings.Singleton.DelImgObj(CurImgObj);
                 Next();
+                SystemSettings.Singleton.Save();
             }
             else if (e.Button.Properties.Caption == "WallPaper")
             {

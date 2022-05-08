@@ -30,12 +30,11 @@ namespace OiuTools
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            //DevExpress.XtraSplashScreen.SplashScreenManager splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::OiuTools.frmSplashScreen), true, true, true);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
-            DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer dockingContainer5 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer();
-            DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer dockingContainer6 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer();
-            DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer dockingContainer7 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer();
-            DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer dockingContainer8 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer();
+            DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer dockingContainer1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer();
+            DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer dockingContainer2 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer();
+            DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer dockingContainer3 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer();
+            DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer dockingContainer4 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer();
             this.documentGroup3 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DocumentGroup(this.components);
             this.BlegMM = new DevExpress.XtraBars.Docking2010.Views.Tabbed.Document(this.components);
             this.documentGroup2 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.DocumentGroup(this.components);
@@ -59,6 +58,7 @@ namespace OiuTools
             this.barCreateFolder = new DevExpress.XtraBars.BarButtonItem();
             this.barWpCollection = new DevExpress.XtraBars.BarEditItem();
             this.comboxWpCollection = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.barCreateCollection = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.rpgSystem = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.rpgWallPaper = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -70,7 +70,7 @@ namespace OiuTools
             this.tabbedView1 = new DevExpress.XtraBars.Docking2010.Views.Tabbed.TabbedView(this.components);
             this.barAndDockingController1 = new DevExpress.XtraBars.BarAndDockingController(this.components);
             this.timerWallPaper = new System.Windows.Forms.Timer(this.components);
-            this.barCreateCollection = new DevExpress.XtraBars.BarButtonItem();
+            this.barDelete = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.documentGroup3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BlegMM)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.documentGroup2)).BeginInit();
@@ -154,10 +154,11 @@ namespace OiuTools
             this.barMergeWallPaper,
             this.barCreateFolder,
             this.barWpCollection,
-            this.barCreateCollection});
+            this.barCreateCollection,
+            this.barDelete});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
             this.ribbonControl1.Margin = new System.Windows.Forms.Padding(4);
-            this.ribbonControl1.MaxItemId = 18;
+            this.ribbonControl1.MaxItemId = 19;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.OptionsMenuMinWidth = 495;
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
@@ -283,6 +284,13 @@ namespace OiuTools
             this.comboxWpCollection.Name = "comboxWpCollection";
             this.comboxWpCollection.SelectedValueChanged += new System.EventHandler(this.comboxWpCollection_SelectedValueChanged);
             // 
+            // barCreateCollection
+            // 
+            this.barCreateCollection.Caption = "Create Collection";
+            this.barCreateCollection.Id = 17;
+            this.barCreateCollection.Name = "barCreateCollection";
+            this.barCreateCollection.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barCreateCollection_ItemClick);
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -308,6 +316,7 @@ namespace OiuTools
             this.rpgWallPaper.ItemLinks.Add(this.barBackHome);
             this.rpgWallPaper.ItemLinks.Add(this.barMergeWallPaper);
             this.rpgWallPaper.ItemLinks.Add(this.barCreateFolder);
+            this.rpgWallPaper.ItemLinks.Add(this.barDelete);
             this.rpgWallPaper.Name = "rpgWallPaper";
             this.rpgWallPaper.Text = "WallPaper";
             // 
@@ -362,20 +371,20 @@ namespace OiuTools
             this.Calendar,
             this.BestLoveMM});
             this.tabbedView1.EnableFreeLayoutMode = DevExpress.Utils.DefaultBoolean.True;
-            dockingContainer5.Element = this.documentGroup3;
-            dockingContainer5.Length.UnitValue = 1.583527943012411D;
-            dockingContainer6.Length.UnitValue = 0.38650951017110968D;
-            dockingContainer7.Element = this.documentGroup2;
-            dockingContainer7.Length.UnitValue = 0.38563140612050073D;
-            dockingContainer8.Element = this.documentGroup1;
-            dockingContainer8.Length.UnitValue = 1.9427081694100861D;
-            dockingContainer6.Nodes.AddRange(new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer[] {
-            dockingContainer7,
-            dockingContainer8});
-            dockingContainer6.Orientation = System.Windows.Forms.Orientation.Vertical;
+            dockingContainer1.Element = this.documentGroup3;
+            dockingContainer1.Length.UnitValue = 1.583527943012411D;
+            dockingContainer2.Length.UnitValue = 0.38650951017110968D;
+            dockingContainer3.Element = this.documentGroup2;
+            dockingContainer3.Length.UnitValue = 0.38563140612050073D;
+            dockingContainer4.Element = this.documentGroup1;
+            dockingContainer4.Length.UnitValue = 1.9427081694100861D;
+            dockingContainer2.Nodes.AddRange(new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer[] {
+            dockingContainer3,
+            dockingContainer4});
+            dockingContainer2.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.tabbedView1.RootContainer.Nodes.AddRange(new DevExpress.XtraBars.Docking2010.Views.Tabbed.DockingContainer[] {
-            dockingContainer5,
-            dockingContainer6});
+            dockingContainer1,
+            dockingContainer2});
             this.tabbedView1.ControlLoaded += new DevExpress.XtraBars.Docking2010.Views.DeferredControlLoadEventHandler(this.tabbedView1_ControlLoaded);
             this.tabbedView1.ControlShown += new DevExpress.XtraBars.Docking2010.Views.DeferredControlLoadEventHandler(this.tabbedView1_ControlShown);
             // 
@@ -389,12 +398,14 @@ namespace OiuTools
             this.timerWallPaper.Interval = 10000;
             this.timerWallPaper.Tick += new System.EventHandler(this.timerWallPaper_Tick);
             // 
-            // barCreateCollection
+            // barDelete
             // 
-            this.barCreateCollection.Caption = "Create Collection";
-            this.barCreateCollection.Id = 17;
-            this.barCreateCollection.Name = "barCreateCollection";
-            this.barCreateCollection.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barCreateCollection_ItemClick);
+            this.barDelete.Caption = "Delete";
+            this.barDelete.Id = 18;
+            this.barDelete.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barDelete.ImageOptions.Image")));
+            this.barDelete.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barDelete.ImageOptions.LargeImage")));
+            this.barDelete.Name = "barDelete";
+            this.barDelete.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barDelete_ItemClick);
             // 
             // frmMain
             // 
@@ -468,6 +479,7 @@ namespace OiuTools
         private DevExpress.XtraBars.BarEditItem barWpCollection;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox comboxWpCollection;
         private DevExpress.XtraBars.BarButtonItem barCreateCollection;
+        private DevExpress.XtraBars.BarButtonItem barDelete;
     }
 }
 

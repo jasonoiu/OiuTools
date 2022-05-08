@@ -40,6 +40,7 @@ namespace OiuTools.Controls
             this.barRescan = new DevExpress.XtraBars.BarButtonItem();
             this.barSetAllToLoveMM = new DevExpress.XtraBars.BarButtonItem();
             this.barDelFolder = new DevExpress.XtraBars.BarButtonItem();
+            this.barDelAllMmPhoto = new DevExpress.XtraBars.BarButtonItem();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
@@ -56,7 +57,6 @@ namespace OiuTools.Controls
             this.barPopAddToWpCollection = new DevExpress.XtraBars.BarSubItem();
             this.barButtonItemTest = new DevExpress.XtraBars.BarButtonItem();
             this.popImgMenu = new DevExpress.XtraBars.PopupMenu(this.components);
-            this.barDelAllMmPhoto = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.pic.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popFolderMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
@@ -149,6 +149,15 @@ namespace OiuTools.Controls
             this.barDelFolder.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barDelFolder.ImageOptions.SvgImage")));
             this.barDelFolder.Name = "barDelFolder";
             this.barDelFolder.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barDelFolder_ItemClick);
+            // 
+            // barDelAllMmPhoto
+            // 
+            this.barDelAllMmPhoto.Caption = "Del All MM Photo";
+            this.barDelAllMmPhoto.Id = 16;
+            this.barDelAllMmPhoto.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barDelAllMmPhoto.ImageOptions.Image")));
+            this.barDelAllMmPhoto.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barDelAllMmPhoto.ImageOptions.LargeImage")));
+            this.barDelAllMmPhoto.Name = "barDelAllMmPhoto";
+            this.barDelAllMmPhoto.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barDelAllMmPhoto_ItemClick);
             // 
             // barManager1
             // 
@@ -295,15 +304,6 @@ namespace OiuTools.Controls
             new DevExpress.XtraBars.LinkPersistInfo(this.barPopAddToWpCollection)});
             this.popImgMenu.Manager = this.barManager1;
             this.popImgMenu.Name = "popImgMenu";
-            // 
-            // barDelAllMmPhoto
-            // 
-            this.barDelAllMmPhoto.Caption = "Del All MM Photo";
-            this.barDelAllMmPhoto.Id = 16;
-            this.barDelAllMmPhoto.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barDelAllMmPhoto.ImageOptions.Image")));
-            this.barDelAllMmPhoto.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barDelAllMmPhoto.ImageOptions.LargeImage")));
-            this.barDelAllMmPhoto.Name = "barDelAllMmPhoto";
-            this.barDelAllMmPhoto.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barDelAllMmPhoto_ItemClick);
             // 
             // ImgControl
             // 

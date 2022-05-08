@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using BlegMM;
 using BlegMM.CControl;
 using BlegMM.Model;
+using DevExpress.LookAndFeel;
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
 using ESBasic;
@@ -29,7 +30,7 @@ namespace OiuTools.Controls
         /// <summary>
         /// 控件被点击时
         /// </summary>
-        public event CbGeneric<ImgControl> FolderViewClicked;
+        public event CbGeneric<ImgControl,Keys?> FolderViewClicked;
 
         /// <summary>
         /// 控件被双击时
@@ -96,11 +97,36 @@ namespace OiuTools.Controls
         /// 视图类型
         /// </summary>
         public ViewType ViewType { get; }
+        /// <summary>
+        /// 是否被选中
+        /// </summary>
+        public bool IsSelected { get; set; } = false;
 
         public ImgObj imgObj => (ImgObj) BaseObj;
 
+        /// <summary>
+        /// 设置为选中状态
+        /// </summary>
+        public void Selected()
+        {
+            IsSelected = true;
+            BackColor = Color.BlueViolet;
+        }
+
+        /// <summary>
+        /// 取消选中状态
+        /// </summary>
+        public void UnSelected()
+        {
+            IsSelected = false;
+            BackColor = UserLookAndFeel.Default.SkinMaskColor;
+        }
+
+
+
         private void FolderView_Click(object sender, MouseEventArgs e)
         {
+            Selected();
             if (e.Button == MouseButtons.Right)
             {
                 if (ViewType == ViewType.Folder)
@@ -111,7 +137,18 @@ namespace OiuTools.Controls
                     popImgMenu.ShowPopup(this.PointToScreen(e.Location));
                 }
             }
-            FolderViewClicked?.Invoke(this);
+            else  //鼠标左键点击
+            {
+                if (Control.ModifierKeys == Keys.Control || Control.ModifierKeys==Keys.Shift)
+                {
+                    FolderViewClicked?.Invoke(this,Control.ModifierKeys);
+                }
+                else
+                {
+                    FolderViewClicked?.Invoke(this, null);
+                }
+            }
+            
         }
 
         private void FolderView_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -311,12 +348,5 @@ namespace OiuTools.Controls
             FolderDeleted?.Invoke(this);
 
         }
-
-
-        
-
-
-
-
     }
 }
