@@ -9,10 +9,283 @@
             封面id
             </summary>
         </member>
+        <member name="P:OiuTools.Api.Core.Entity.BeautyModel.Period">
+            <summary>
+            期数
+            </summary>
+        </member>
         <member name="T:OiuTools.Api.Core.Entity.PhotoAlbums">
             <summary>
             写真集
             </summary>
+        </member>
+        <member name="T:OiuTools.Api.Core.Tools.ResultModel">
+            <summary>
+            返回的结果
+            </summary>
+        </member>
+        <member name="P:OiuTools.Api.Core.Tools.ResultModel.Status">
+            <summary>
+            返回结果的状态
+            </summary>
+        </member>
+        <member name="P:OiuTools.Api.Core.Tools.ResultModel.Message">
+            <summary>
+            返回的提示信息
+            </summary>
+        </member>
+        <member name="P:OiuTools.Api.Core.Tools.ResultModel.Data">
+            <summary>
+            要返回的数据
+            </summary>
+        </member>
+        <member name="T:OiuTools.Api.Core.Tools.ResultStatus">
+            <summary>
+            状态枚举
+            </summary>
+        </member>
+        <member name="T:OiuTools.Api.Core.Tools.StaticExtend">
+            <summary>
+            扩展方法
+            </summary>
+        </member>
+        <member name="M:OiuTools.Api.Core.Tools.StaticExtend.IsNullOrEmpty(System.Data.DataTable)">
+            <summary>
+            DataTable是否为空
+            </summary>
+            <param name="dt"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OiuTools.Api.Core.Tools.StaticExtend.IsNotNullOrEmpty(System.Data.DataTable)">
+            <summary>
+            DataTable是否不为空
+            </summary>
+            <param name="dt"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OiuTools.Api.Core.Tools.StaticExtend.IsNullOrEmpty(System.String)">
+            <summary>
+            是否为空字符串
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OiuTools.Api.Core.Tools.StaticExtend.IsNotNullOrEmpty``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            列表不为空
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OiuTools.Api.Core.Tools.StaticExtend.IsNotNullOrEmpty``1(System.Data.EnumerableRowCollection{``0})">
+            <summary>
+            列表不为空
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OiuTools.Api.Core.Tools.StaticExtend.IsNullOrEmpty``1(System.Data.EnumerableRowCollection{``0})">
+            <summary>
+            列表为空
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OiuTools.Api.Core.Tools.StaticExtend.IsNullOrEmpty``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            列表为空
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OiuTools.Api.Core.Tools.StaticExtend.IsNotNullOrEmpty(System.String)">
+            <summary>
+            是否不是空字符串
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OiuTools.Api.Core.Tools.StaticExtend.IsNumber(System.String)">
+            <summary>
+            是否为数字
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OiuTools.Api.Core.Tools.StaticExtend.ToUploadRelativePath(System.String)">
+            <summary>
+            绝对路径转换为上传文件夹FileUpload的相对路径
+            </summary>
+            <param name="s">物理绝对路径</param>
+            <returns></returns>
+        </member>
+        <member name="M:OiuTools.Api.Core.Tools.StaticExtend.ToInt(System.Object)">
+            <summary>
+            对象转换为Int类型
+            </summary>
+            <param name="o"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OiuTools.Api.Core.Tools.StaticExtend.ToStringSplit(System.Object,System.Char)">
+            <summary>
+            将需要分隔的字符串，分隔成'1','2','3'格式的字符串
+            </summary>
+            <param name="o">要分隔的对象</param>
+            <param name="separator">分隔符</param>
+            <returns></returns>
+        </member>
+        <member name="M:OiuTools.Api.Core.Tools.StaticExtend.ToLong(System.Object)">
+            <summary>
+            对象转换为Long类型
+            </summary>
+            <param name="o"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OiuTools.Api.Core.Tools.StaticExtend.ToDecimal(System.Object)">
+            <summary>
+            对象转换为decimal类型
+            </summary>
+            <param name="o"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OiuTools.Api.Core.Tools.StaticExtend.ToBoolean(System.Object)">
+            <summary>
+            对象转换为bool类型
+            </summary>
+            <param name="o"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OiuTools.Api.Core.Tools.StaticExtend.ToDateTime(System.Object)">
+            <summary>
+            对象转换为bool类型
+            </summary>
+            <param name="o"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OiuTools.Api.Core.Tools.StaticExtend.DecimalFormat(System.Object,System.Boolean)">
+            <summary>
+            金额千位符123,856,也可保留小数位：123,856.00
+            </summary>
+            <param name="o">要转换的字符对象</param>
+            <param name="isAlwaysRetainDecimal">是否总是保留小数，默认为true</param>
+            <returns></returns>
+        </member>
+        <member name="M:OiuTools.Api.Core.Tools.StaticExtend.ToJsonString(System.Object)">
+            <summary>
+            对象序列化为json
+            </summary>
+            <param name="jsonObject"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OiuTools.Api.Core.Tools.StaticExtend.ToLowerString(System.Boolean)">
+            <summary>
+            bool类型转小写的true/false字符串
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OiuTools.Api.Core.Tools.StaticExtend.DateTimeToEnString(System.Object,System.Boolean)">
+            <summary>
+            时间转化为英语文化格式
+            </summary>
+            <param name="dateTime"></param>
+            <param name="hasHours">是否有时和分</param>
+            <returns></returns>
+        </member>
+        <member name="M:OiuTools.Api.Core.Tools.StaticExtend.ToStringArray(System.Collections.Generic.IEnumerable{System.Int64})">
+            <summary>
+            将集合转换成逗号分隔的字符串
+            </summary>
+            <param name="objList">对象集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:OiuTools.Api.Core.Tools.StaticExtend.ToStringArrayOrZero(System.Collections.Generic.IEnumerable{System.Int64})">
+            <summary>
+            将集合转换成逗号分隔的字符串，如果objList为空，则返回0
+            </summary>
+            <param name="objList">对象集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:OiuTools.Api.Core.Tools.StaticExtend.ToStringArray(System.Collections.Generic.IEnumerable{System.String},System.Boolean)">
+            <summary>
+            将集合转换成逗号分隔的字符串
+            </summary>
+            <param name="objList">对象集合</param>
+            <param name="addApostrophe">是否添加单引号，默认为true</param>
+            <returns></returns>
+        </member>
+        <member name="M:OiuTools.Api.Core.Tools.StaticExtend.UrlEncode(System.String,System.Text.Encoding)">
+            <summary>
+            将http协议中的参数进行编码
+            </summary>
+            <param name="str"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OiuTools.Api.Core.Tools.StaticExtend.UrlDecode(System.String,System.Text.Encoding)">
+            <summary>
+            将http协议中的参数进行解码
+            </summary>
+            <param name="str"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OiuTools.Api.Core.Tools.StaticExtend.ToStringByCharSplit(System.Collections.Generic.IEnumerable{System.String},System.Int32)">
+            <summary>
+            将前几个的集合数据转换成斜线“/”分隔的字符串
+            </summary>
+            <param name="objList"></param>
+            <param name="num">从0开始的第几个</param>
+            <returns></returns>
+        </member>
+        <member name="M:OiuTools.Api.Core.Tools.StaticExtend.ToListNum(System.String,System.Char)">
+            <summary>
+            将特定符号分隔的数字字符串转换成集合
+            </summary>
+            <param name="str">分隔的字符串</param>
+            <param name="sepChar">分隔符，默认为逗号</param>
+            <returns></returns>
+        </member>
+        <member name="M:OiuTools.Api.Core.Tools.StaticExtend.ToStringList(System.String)">
+            <summary>
+            将逗号分隔的字符串转换成字符串集合
+            </summary>
+            <param name="str">逗号分隔的字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:OiuTools.Api.Core.Tools.StaticExtend.addApostrophetoStringList(System.String)">
+            <summary>
+            给用逗号分隔的字符串集合添加单引号
+            </summary>
+            <param name="stringList">逗号分隔的字符串集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:OiuTools.Api.Core.Tools.StaticExtend.DateTimeToDatabaseString(System.Object)">
+            <summary>
+            时间转化为数据库可用的格式
+            </summary>
+            <param name="dateTime"></param>
+            <param name="hasHours"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OiuTools.Api.Core.Tools.StaticExtend.OaResultToDictionary(System.String)">
+            <summary>
+            OA返回的字符串结果转换成字典集合
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OiuTools.Api.Core.Tools.StaticExtend.IsEqualString(System.Object,System.String)">
+            <summary>
+            该对象是否与字符串相等
+            </summary>
+            <param name="obj"></param>
+            <param name="s"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

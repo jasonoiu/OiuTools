@@ -39,7 +39,7 @@ namespace OiuTools.Controls
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.mainPanel.Location = new System.Drawing.Point(4, 0);
-            this.mainPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.mainPanel.Margin = new System.Windows.Forms.Padding(4);
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(1183, 1028);
             this.mainPanel.TabIndex = 0;
@@ -54,7 +54,7 @@ namespace OiuTools.Controls
             this.pagerControl1.PageIndex = 0;
             this.pagerControl1.PageSize = 10;
             this.pagerControl1.RecordCount = ((long)(0));
-            this.pagerControl1.Size = new System.Drawing.Size(604, 53);
+            this.pagerControl1.Size = new System.Drawing.Size(1183, 53);
             this.pagerControl1.TabIndex = 1;
             // 
             // BlegMM

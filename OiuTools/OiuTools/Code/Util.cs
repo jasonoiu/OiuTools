@@ -1,11 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Net;
+using System.Reflection;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Text;
+using System.Windows.Forms;
 using BlegMM.Model;
 using OiuTools.Controls;
 using OiuTools.Views;
 
 namespace OiuTools.Code
 {
-    public class Util
+    /// <summary>
+    /// 静态工具类
+    /// </summary>
+    public static class Util
     {
         public static void ImgViewMouseDoubleClicked(ImgControl obj, SortEnum sortEnum, IEnumerable<ImgObj> list)
         {
@@ -21,12 +31,13 @@ namespace OiuTools.Code
         /// <param name="musicUrl"></param>
         public static void PlayMusic(string musicUrl)
         {
-            System.Media.SoundPlayer player = new System.Media.SoundPlayer();
+            var player = new System.Media.SoundPlayer();
             player.SoundLocation = musicUrl;
             player.LoadAsync();
             player.PlaySync();
         }
 
+        
 
 
 

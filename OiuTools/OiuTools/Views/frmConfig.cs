@@ -30,14 +30,15 @@ namespace OiuTools.Views
 
         private void frmConfig_Load(object sender, EventArgs e)
         {
-            txtWallPaperInterval.Text = (ss.Intervals / 1000).ToString();
+            txtWallPaperInterval.Text = (ss.Intervals / 60000).ToString();
             txtMinPeriod.Text = ss.MinPeriod.ToString();
+            txtExtraMinPeriod.Text = ss.ExtraMinPeriod.ToString();
             checkPlayMusic.Checked = ms.IsPlayMusic;
         }
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            var interval = txtWallPaperInterval.Text.ToInt() * 1000;
+            var interval = txtWallPaperInterval.Text.ToInt() * 60000;
             if (interval < 10000)
             {
                 XtraMessageBox.Show("壁纸切换时间不能小于10秒", "温馨提示");
@@ -48,6 +49,7 @@ namespace OiuTools.Views
 
             ss.Intervals = interval;
             ss.MinPeriod = txtMinPeriod.Text.ToInt();
+            ss.ExtraMinPeriod = txtExtraMinPeriod.Text.ToInt();
             ss.Save();
 
             if (ms.IsPlayMusic != checkPlayMusic.Checked)

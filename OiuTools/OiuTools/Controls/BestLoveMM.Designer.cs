@@ -42,6 +42,9 @@ namespace OiuTools.Controls
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.barFirstMergeWp = new DevExpress.XtraBars.BarButtonItem();
+            this.barSecondMergeWp = new DevExpress.XtraBars.BarButtonItem();
+            this.barOpenFolder = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.imgContainer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
@@ -53,10 +56,10 @@ namespace OiuTools.Controls
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.imgContainer.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
-            this.imgContainer.ItemHeight = 134;
+            this.imgContainer.ItemHeight = 113;
             this.imgContainer.Location = new System.Drawing.Point(0, 0);
             this.imgContainer.Name = "imgContainer";
-            this.imgContainer.Size = new System.Drawing.Size(366, 786);
+            this.imgContainer.Size = new System.Drawing.Size(329, 660);
             this.imgContainer.SortOrder = System.Windows.Forms.SortOrder.Descending;
             this.imgContainer.TabIndex = 0;
             templatedItemElement1.FieldName = "ImageMember";
@@ -77,7 +80,10 @@ namespace OiuTools.Controls
             // 
             this.popMenu.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.barSetWallPaper),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barDel)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.barOpenFolder),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barDel),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barFirstMergeWp),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barSecondMergeWp)});
             this.popMenu.Manager = this.barManager1;
             this.popMenu.Name = "popMenu";
             // 
@@ -104,8 +110,11 @@ namespace OiuTools.Controls
             this.barManager1.Form = this;
             this.barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.barDel,
-            this.barSetWallPaper});
-            this.barManager1.MaxItemId = 2;
+            this.barSetWallPaper,
+            this.barFirstMergeWp,
+            this.barSecondMergeWp,
+            this.barOpenFolder});
+            this.barManager1.MaxItemId = 5;
             // 
             // barDockControlTop
             // 
@@ -113,15 +122,15 @@ namespace OiuTools.Controls
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManager1;
-            this.barDockControlTop.Size = new System.Drawing.Size(366, 0);
+            this.barDockControlTop.Size = new System.Drawing.Size(329, 0);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 786);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 660);
             this.barDockControlBottom.Manager = this.barManager1;
-            this.barDockControlBottom.Size = new System.Drawing.Size(366, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(329, 0);
             // 
             // barDockControlLeft
             // 
@@ -129,28 +138,48 @@ namespace OiuTools.Controls
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 0);
             this.barDockControlLeft.Manager = this.barManager1;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 786);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 660);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(366, 0);
+            this.barDockControlRight.Location = new System.Drawing.Point(329, 0);
             this.barDockControlRight.Manager = this.barManager1;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 786);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 660);
+            // 
+            // barFirstMergeWp
+            // 
+            this.barFirstMergeWp.Caption = "Set First Merge Wp";
+            this.barFirstMergeWp.Id = 2;
+            this.barFirstMergeWp.Name = "barFirstMergeWp";
+            this.barFirstMergeWp.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barFirstMergeWp_ItemClick);
+            // 
+            // barSecondMergeWp
+            // 
+            this.barSecondMergeWp.Caption = "Set Second Merge Wp";
+            this.barSecondMergeWp.Id = 3;
+            this.barSecondMergeWp.Name = "barSecondMergeWp";
+            this.barSecondMergeWp.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barSecondMergeWp_ItemClick);
+            // 
+            // barOpenFolder
+            // 
+            this.barOpenFolder.Caption = "Open Folder";
+            this.barOpenFolder.Id = 4;
+            this.barOpenFolder.Name = "barOpenFolder";
+            this.barOpenFolder.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barOpenFolder_ItemClick);
             // 
             // BestLoveMM
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.imgContainer);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "BestLoveMM";
-            this.Size = new System.Drawing.Size(366, 786);
+            this.Size = new System.Drawing.Size(329, 660);
             this.Load += new System.EventHandler(this.BestLoveMM_Load);
             ((System.ComponentModel.ISupportInitialize)(this.imgContainer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.popMenu)).EndInit();
@@ -171,5 +200,8 @@ namespace OiuTools.Controls
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
+        private DevExpress.XtraBars.BarButtonItem barFirstMergeWp;
+        private DevExpress.XtraBars.BarButtonItem barSecondMergeWp;
+        private DevExpress.XtraBars.BarButtonItem barOpenFolder;
     }
 }

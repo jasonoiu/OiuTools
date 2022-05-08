@@ -28,6 +28,9 @@ namespace OiuTools.Api.Database.Migrations.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("longtext");
 
+                    b.Property<int>("Period")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("BeautyModel");

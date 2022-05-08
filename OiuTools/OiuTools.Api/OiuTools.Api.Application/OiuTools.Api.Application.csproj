@@ -18,11 +18,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\BlegMMOld\BlegMM\BlegMM.csproj" />
     <ProjectReference Include="..\OiuTools.Api.Core\OiuTools.Api.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="BeMo\Dtos\" />
     <Folder Include="BeMo\Services\" />
     <Folder Include="System\Services\" />
   </ItemGroup>

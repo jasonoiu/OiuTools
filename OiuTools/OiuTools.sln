@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31005.135
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OiuTools", "OiuTools\OiuTools.csproj", "{706F294E-D2C5-4D6C-89B7-F3736DD937C1}"
 EndProject
@@ -11,17 +11,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PublicLibrary", "..\..\Bleg
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlegMMAPP", "BlegMMAPP\BlegMMAPP.csproj", "{410CBD72-B257-4922-94C2-F7D9C83F7B9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OiuTools.Api.Application", "OiuTools.Api\OiuTools.Api.Application\OiuTools.Api.Application.csproj", "{61C1FC4F-E063-480D-B4D5-192B4A1FC205}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OiuTools.Api.Application", "OiuTools.Api\OiuTools.Api.Application\OiuTools.Api.Application.csproj", "{61C1FC4F-E063-480D-B4D5-192B4A1FC205}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OiuTools.Api.Core", "OiuTools.Api\OiuTools.Api.Core\OiuTools.Api.Core.csproj", "{302C13F1-FF73-4C47-8EB8-FE7A0489F3B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OiuTools.Api.Core", "OiuTools.Api\OiuTools.Api.Core\OiuTools.Api.Core.csproj", "{302C13F1-FF73-4C47-8EB8-FE7A0489F3B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OiuTools.Api.Database.Migrations", "OiuTools.Api\OiuTools.Api.Database.Migrations\OiuTools.Api.Database.Migrations.csproj", "{2F4D2A0D-0A30-47F9-B34E-88CFDE565AC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OiuTools.Api.Database.Migrations", "OiuTools.Api\OiuTools.Api.Database.Migrations\OiuTools.Api.Database.Migrations.csproj", "{2F4D2A0D-0A30-47F9-B34E-88CFDE565AC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OiuTools.Api.EntityFramework.Core", "OiuTools.Api\OiuTools.Api.EntityFramework.Core\OiuTools.Api.EntityFramework.Core.csproj", "{6DA4FD03-25C5-452F-BBED-FA5AC64CCFE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OiuTools.Api.EntityFramework.Core", "OiuTools.Api\OiuTools.Api.EntityFramework.Core\OiuTools.Api.EntityFramework.Core.csproj", "{6DA4FD03-25C5-452F-BBED-FA5AC64CCFE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OiuTools.Api.Web.Core", "OiuTools.Api\OiuTools.Api.Web.Core\OiuTools.Api.Web.Core.csproj", "{BB186649-EC64-4AD4-8A53-E6221C7048D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OiuTools.Api.Web.Core", "OiuTools.Api\OiuTools.Api.Web.Core\OiuTools.Api.Web.Core.csproj", "{BB186649-EC64-4AD4-8A53-E6221C7048D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OiuTools.Api.Web.Entry", "OiuTools.Api\OiuTools.Api.Web.Entry\OiuTools.Api.Web.Entry.csproj", "{5C0F17E9-CFCA-4242-B82A-4D33A6298045}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OiuTools.Api.Web.Entry", "OiuTools.Api\OiuTools.Api.Web.Entry\OiuTools.Api.Web.Entry.csproj", "{5C0F17E9-CFCA-4242-B82A-4D33A6298045}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OiuTools.Api.Web.LocalEntry", "OiuTools.Api.Web.LocalEntry\OiuTools.Api.Web.LocalEntry.csproj", "{AB5CE8E1-14FD-4987-801A-2F52AFA32249}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +73,10 @@ Global
 		{5C0F17E9-CFCA-4242-B82A-4D33A6298045}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C0F17E9-CFCA-4242-B82A-4D33A6298045}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C0F17E9-CFCA-4242-B82A-4D33A6298045}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB5CE8E1-14FD-4987-801A-2F52AFA32249}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB5CE8E1-14FD-4987-801A-2F52AFA32249}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB5CE8E1-14FD-4987-801A-2F52AFA32249}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB5CE8E1-14FD-4987-801A-2F52AFA32249}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

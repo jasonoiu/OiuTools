@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BlegMM;
+using BlegMM.Model;
 using DevExpress.XtraEditors;
 using ESBasic;
 
@@ -23,6 +24,10 @@ namespace OiuTools.Controls
         /// 壁纸改变事件
         /// </summary>
         public event CbGeneric WallPaperChanged;
+        /// <summary>
+        /// 打开文件夹事件
+        /// </summary>
+        public event CbGeneric<FolderObj> OpenFolderEvent;
         
         public BestLoveMM()
         {
@@ -112,9 +117,27 @@ namespace OiuTools.Controls
             return chooseAnotherImg();
         }
 
+        private void barFirstMergeWp_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var id = (Guid)imgContainer.SelectedValue;
+            var wallPaper = ss.BestLoveMMWallPaperLists.FirstOrDefault(m => m.Id == id);
+            if (wallPaper == null) return;
+            ss.DicMergeWallPaper["one"] = wallPaper.FileUrl;
+        }
 
+        private void barSecondMergeWp_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var id = (Guid)imgContainer.SelectedValue;
+            var wallPaper = ss.BestLoveMMWallPaperLists.FirstOrDefault(m => m.Id == id);
+            if (wallPaper == null) return;
+            ss.DicMergeWallPaper["two"] = wallPaper.FileUrl;
+        }
 
-
-
+        private void barOpenFolder_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var id = (Guid)imgContainer.SelectedValue;
+            var folderObj = ss.AllImgFolderObjList.ImgObjList.FirstOrDefault(m => m.Id == id).Folder;
+            OpenFolderEvent?.Invoke(folderObj);
+        }
     }
 }

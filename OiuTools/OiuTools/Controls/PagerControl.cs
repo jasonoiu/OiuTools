@@ -161,8 +161,8 @@ namespace OiuTools.Controls
                     }
                 }
             }
-            var front = 1;
-            var w = 28; //页码等距
+            var w = 8; //页码间距
+            var locationX = btnPrePage.Width + w; //累积的x坐标
             var yPoint = 7;
             //设置页码
             //设置位置
@@ -189,7 +189,8 @@ namespace OiuTools.Controls
                     c.Visible = true;
                     visibleCount++;
 
-                    c.Location = new Point(w * (1 + i) + front, yPoint);
+                    c.Location = new Point(locationX, yPoint);
+                    locationX = locationX + c.Width + w;
                     if (lst[i] == PageIndex || (PageIndex == 0 && lst[i] == 1))
                     {
                         c.ForeColor = Color.SteelBlue;
@@ -202,11 +203,14 @@ namespace OiuTools.Controls
                 }
             }
 
-            this.btnNextPage.Location = new Point(w * (1 + visibleCount) + front, yPoint);
-            this.lblCountPage.Location = new Point(w * (2 + visibleCount) + front, yPoint+4);
+            this.btnNextPage.Location = new Point(locationX, yPoint);
+            locationX = locationX + btnNextPage.Width + w;
+            this.lblCountPage.Location = new Point(locationX, yPoint+4);
+            locationX = locationX + lblCountPage.Width + w;
 
-            this.txtPageIndex.Location = new Point(this.lblCountPage.Location.X + this.lblCountPage.Width + 15, yPoint);
-            this.btnGO.Location = new Point(this.txtPageIndex.Location.X + this.txtPageIndex.Width + 3, yPoint);
+            this.txtPageIndex.Location = new Point(locationX + 15, yPoint);
+            locationX = locationX + txtPageIndex.Width + 3;
+            this.btnGO.Location = new Point(locationX, yPoint);
         }
 
         #endregion

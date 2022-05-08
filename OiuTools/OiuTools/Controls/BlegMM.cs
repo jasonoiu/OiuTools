@@ -119,8 +119,18 @@ namespace OiuTools.Controls
             var folderView = new ImgControl(folderObj, ViewType.Folder);
             //folderView.FolderViewClicked += FolderViewOnFolderViewClicked;
             folderView.FolderViewMouseDoubleClicked += FolderViewMouseDoubleClicked;
-            folderView.RescanThumbnailsBuildFinished += FolderView_RescanThumbnailsBuildFinished; ;
+            folderView.RescanThumbnailsBuildFinished += FolderView_RescanThumbnailsBuildFinished;
+            folderView.FolderDeleted += FolderView_FolderDeleted;
             mainPanel.Controls.Add(folderView);
+        }
+
+        /// <summary>
+        /// 当文件夹被删除后的回调
+        /// </summary>
+        /// <param name="obj"></param>
+        private void FolderView_FolderDeleted(ImgControl obj)
+        {
+            initFolderListView();
         }
 
         private void FolderView_RescanThumbnailsBuildFinished(string message)
@@ -148,6 +158,16 @@ namespace OiuTools.Controls
             initImageListView(obj.BaseObj as FolderObj, sortEnum);
 
             PlaySexMusic(); 
+        }
+
+        /// <summary>
+        /// 打开文件夹
+        /// </summary>
+        /// <param name="folderObj"></param>
+        public void OpenFolder(FolderObj folderObj)
+        {
+            var folderView = new ImgControl(folderObj, ViewType.Folder);
+            FolderViewMouseDoubleClicked(folderView);
         }
 
 
@@ -219,7 +239,9 @@ namespace OiuTools.Controls
             }
         }
 
-
+        /// <summary>
+        /// 返回到首页
+        /// </summary>
         public void BackToHome()
         {
             pagerControl1.PageIndex = 1;

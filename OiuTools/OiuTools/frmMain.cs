@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -16,6 +17,7 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraSplashScreen;
 using OiuTools.Code;
 using OiuTools.Views;
+using PublicLibrary;
 
 namespace OiuTools
 {
@@ -60,6 +62,7 @@ namespace OiuTools
             ms = MySettings.Singleton;
             ss = SystemSettings.Singleton;
             dm.View.QueryControl += OnQueryControl;
+            timerWallPaper.Interval = ss.Intervals;
             timerWallPaper.Enabled = true;
             MmReptile.Singleton.FolderScanFinished += Singleton_FolderScanFinishedEvent;
             
@@ -71,7 +74,7 @@ namespace OiuTools
             if (!ms.LastLocation.IsEmpty)
             {
                 Location = ms.LastLocation;
-                StartPosition = FormStartPosition.WindowsDefaultLocation;
+                //StartPosition = FormStartPosition.WindowsDefaultLocation;
             }
 
             BackUpSettingEveryDay();
@@ -99,6 +102,18 @@ namespace OiuTools
             {
                 this.Size = ms.MainFormSize;
             }
+            
+            //wallpaper collection
+            if (ss.WallPaperCollections.Any())
+            {
+                foreach (var wallPaperCollection in ss.WallPaperCollections)
+                {
+                    comboxWpCollection.Items.Add(wallPaperCollection.Name);
+                }
+            }
+
+            ProcessTempTask();
+
         }
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -110,6 +125,41 @@ namespace OiuTools
 
         }
 
+        /// <summary>
+        /// 处理临时任务
+        /// </summary>
+        void ProcessTempTask()
+        {
+            var delMinPeriod = 820;
+            if (!ss.AllImgFolderObjList.FolderObjList.Any(m=>m.FolderNo<=delMinPeriod)) return;
+            
+            new Action((() =>
+            {
+
+                try
+                {
+                    var copyFoldersList = ss.AllImgFolderObjList.FolderObjList.Where(m => m.FolderNo <= delMinPeriod)
+                        .ToList().DeepCopyWithBinarySerialize();
+                    foreach (var folderObj in copyFoldersList)
+                    {
+                        ss.DelFolder(folderObj);
+                    }
+                    ss.Save();
+                    BlegMmBackToHome();
+                    XMessage.Show("文件夹批量删除完成！");
+                }
+                catch (Exception e)
+                {
+                    ss.Save();
+                    XMessage.Show(e.Message);
+                }
+
+
+            })).BeginInvoke(null, null);
+        }
+
+
+
         void BackUpSettingEveryDay()
         {
             new Action((() =>
@@ -118,7 +168,17 @@ namespace OiuTools
             })).BeginInvoke(null, null);
         }
 
-
+        /// <summary>
+        /// 美女相册返回到首页
+        /// </summary>
+        private void BlegMmBackToHome()
+        {
+            BeginInvoke(new Action((() =>
+            {
+                var blegMM = BlegMM.Control as Controls.BlegMM;
+                blegMM?.BackToHome();
+            })));
+        }
 
 
         /// <summary>
@@ -127,11 +187,7 @@ namespace OiuTools
         private void Singleton_FolderScanFinishedEvent()
         {
             barStatus.Caption = "Scan finished";
-            BeginInvoke(new Action((() =>
-            {
-                var blegMM = BlegMM.Control as Controls.BlegMM;
-                blegMM?.BackToHome();
-            })));
+            BlegMmBackToHome();
         }
 
 
@@ -146,7 +202,11 @@ namespace OiuTools
 
         private void timerWallPaper_Tick(object sender, EventArgs e)
         {
-
+            if (!barToggleChanging.Checked)
+            {
+                timerWallPaper.Enabled = false;
+                return;
+            }
             new Action((() =>
             {
                 if (!ss.CurWallPagerList.Any())
@@ -163,7 +223,7 @@ namespace OiuTools
                         XtraMessageBox.Show($"curImgObj为null值");
                         return;
                     }
-                    if (curImgObj.IsPcWallPaperSize)
+                    if (img1.Width > img1.Height)
                     {
                         Tools.SetWallPaper(curImgObj.FileUrl);
                         img1.Dispose();
@@ -258,7 +318,7 @@ namespace OiuTools
             }
 
             var img = radomImg.FileUrl.FixImgUrl().ToImage();
-            if (img == null)
+            if (img == null || img.Width > img.Height)
             {
                 return getAnotherImgObj(curImgObj);
             }
@@ -363,10 +423,16 @@ namespace OiuTools
                 
                 var bestLoveMM = BestLoveMM.Control as Controls.BestLoveMM;
                 bestLoveMM.WallPaperChanged += BestLoveMM_WallPaperChanged;
+                
 
                 var blegMM = BlegMM.Control as Controls.BlegMM;
                 blegMM.FolderRecanThumbnailsBuildFinished += BlegMM_FolderRecanThumbnailsBuildFinished;
                 blegMM.FolderAllImagesInited += BlegMM_FolderRecanThumbnailsBuildFinished;
+
+                bestLoveMM.OpenFolderEvent += folderObj =>
+                {
+                    blegMM.OpenFolder(folderObj);
+                };
 
             })).BeginInvoke(null, null);
         }
@@ -379,6 +445,115 @@ namespace OiuTools
             {
                 barStatus.Caption = message;
             })));
+        }
+
+        private void barMergeWallPaper_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var oneImgUrl = ss.DicMergeWallPaper["one"];
+            var twoImgUrl = ss.DicMergeWallPaper["two"];
+
+            #region 检测是否为空
+
+            if (oneImgUrl.IsNullOrEmpty())
+            {
+                XtraMessageBox.Show($"第一张图片不能为空！");
+                return;
+            }
+
+            if (twoImgUrl.IsNullOrEmpty())
+            {
+                XtraMessageBox.Show($"第二张图片不能为空！");
+                return;
+            }
+
+            #endregion
+
+            #region 检测是否为竖屏壁纸
+
+            var oneImgObj = ss.AllImgFolderObjList.ImgObjList.FirstOrDefault(m =>
+                m.FileUrl.Equals(oneImgUrl, StringComparison.OrdinalIgnoreCase));
+            if (oneImgObj == null)
+            {
+                XtraMessageBox.Show($"第一张图片不存在！");
+                return;
+            }
+
+            if (oneImgObj.IsPcWallPaperSize)
+            {
+                XtraMessageBox.Show($"第一张图片不是竖屏图片！");
+                return;
+            }
+
+            var twoImgObj = ss.AllImgFolderObjList.ImgObjList.FirstOrDefault(m =>
+                m.FileUrl.Equals(twoImgUrl, StringComparison.OrdinalIgnoreCase));
+            if (twoImgObj == null)
+            {
+                XtraMessageBox.Show($"第二张图片不存在！");
+                return;
+            }
+
+            if (twoImgObj.IsPcWallPaperSize)
+            {
+                XtraMessageBox.Show($"第二张图片不是竖屏图片！");
+                return;
+            }
+
+
+            #endregion
+
+            new Action((() =>
+            {
+
+                var img1 = oneImgUrl.ToImage();
+                var img2 = twoImgUrl.ToImage();
+
+                var combinImg = Tools.CombinTwoImage(img1, img2);
+
+                if (combinImg == null)
+                {
+                    XtraMessageBox.Show($"combinImg为null值");
+                    return;
+                }
+
+                Tools.SetWallPaper(combinImg);
+            })).BeginInvoke(null, null);
+        }
+
+        private void barCreateFolder_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var result = XtraInputBox.Show("Enter Folder Name", "Create Folder", "");
+            if (result.IsNullOrEmpty()) return;
+
+            var max = ss.AllImgFolderObjList.FolderObjList.Max(m => m.FolderNo);
+            Directory.CreateDirectory(
+                $@"{ss.ImgFolderPath}\No.{max + 1} {result} {DateTime.Now:yyyy.MM.dd}");
+        }
+
+        
+        private void comboxWpCollection_SelectedValueChanged(object sender, EventArgs e)
+        {
+            var edit = sender as ComboBoxEdit;
+            var list = ss.WallPaperCollections.FirstOrDefault(m => m.Name.Equals(edit.SelectedItem));
+            ss.CurWallPagerList = list.Lists;
+        }
+
+        private void barCreateCollection_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var name = XtraInputBox.Show("Enter Collection Name", "Create Collection", "");
+            if (name.IsNullOrEmpty()) return;
+
+            if (ss.TagsLists.Exists(m => m.Equals(name, StringComparison.OrdinalIgnoreCase)))
+            {
+                XtraMessageBox.Show("集合名称已存在！");
+                return;
+            }
+
+            ss.TagsLists.Add(name);
+
+            ss.WallPaperCollections.Add(new WallPaperCollection
+            {
+                Id = Guid.NewGuid(), Lists = new List<WallPaper>(), Name = name
+            });
         }
     }
 }

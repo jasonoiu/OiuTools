@@ -9,5 +9,12 @@ namespace OiuTools.Api.Core.Entity
         /// 封面id
         /// </summary>
         public long CoverId { get; set; }
+
+
+        /// <summary>
+        /// 期数
+        /// </summary>
+        public int Period { get; set; }
+
     }
 }

@@ -7,11 +7,16 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows.Forms;
 using BlegMM;
 using BlegMM.CControl;
 using BlegMM.Model;
+using DevExpress.XtraBars;
+using DevExpress.XtraEditors;
 using ESBasic;
+using OiuTools.Code;
+using PublicLibrary;
 
 namespace OiuTools.Controls
 {
@@ -32,9 +37,9 @@ namespace OiuTools.Controls
         public event CbGeneric<ImgControl, SortEnum, IEnumerable<ImgObj>> FolderViewMouseDoubleClicked;
 
         /// <summary>
-        /// 从当前壁纸移除时发生
+        /// 文件夹被删除时
         /// </summary>
-        public event CbGeneric<ImgControl> RemoveFromCurWallPaperList;
+        public event CbGeneric<ImgControl> FolderDeleted;
 
         /// <summary>
         /// 重新扫描后生成单个缩略图完成
@@ -66,7 +71,23 @@ namespace OiuTools.Controls
             {
                 //this.ContextMenuStrip = skinContextMenu_Image;
                 this.pic.Image = ((ImgObj)fiBaseObj).GetThumbnails();
+                foreach (var collection in ss.WallPaperCollections)
+                {
+                    var bar = new BarButtonItem(barManager1, collection.Name);
+                    bar.ItemClick += Bar_ItemClick;
+                    barPopAddToWpCollection.AddItem(bar);
+                }
             }
+        }
+
+        private void Bar_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var name = e.Link.Caption;
+            ss.WallPaperCollections.FirstOrDefault(m=>m.Name==name)
+                ?.Lists.Add(new WallPaper
+            {
+                FileUrl = imgObj.FileUrl, Name = imgObj.Name, Id = imgObj.Id
+            });
         }
 
         public IEnumerable<ImgObj> CurImgList { get; set; }
@@ -183,7 +204,7 @@ namespace OiuTools.Controls
                 {
                     AddTime = DateTime.Now,
                     FileUrl = fs,
-                    Name = fs.Substring(fs.LastIndexOf(@"\", StringComparison.Ordinal) + 1, 8),
+                    Name = fs.Substring(fs.LastIndexOf(@"\", StringComparison.Ordinal) + 1),
                     Folder = folderObj,
                     Id = Guid.NewGuid()
                 };
@@ -225,6 +246,76 @@ namespace OiuTools.Controls
         {
             Tools.SetWallPaper(imgObj.FileUrl);
         }
+
+        private void barUpload_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var client = new RestClient(@"http://localhost:44344");
+            var result = client.Get($@"api/bm/upload-photo?name={imgObj.MmName}&period={imgObj.Folder.FolderNo}&
+                                path={HttpUtility.UrlPathEncode(imgObj.FileUrl)}&spath={HttpUtility.UrlPathEncode(imgObj.ThumbnailsUrl)}");
+
+        }
+
+        private void barSetAllToLoveMM_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var folderObj = (FolderObj)BaseObj;
+            var lists = ss.AllImgFolderObjList.ImgObjList.Where(m => m.Folder == folderObj).ToList();
+            foreach (var img in lists)
+            {
+                img.IsLove = true;
+                img.Level = 1;
+            }
+            ss.Save();
+
+        }
+
+        private void barFirstWallPaper_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ss.DicMergeWallPaper["one"] = imgObj.FileUrl;
+        }
+
+        private void barSecondWallPaper_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ss.DicMergeWallPaper["two"] = imgObj.FileUrl;
+        }
+
+        /// <summary>
+        /// 删除文件夹
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void barDelFolder_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if(XMessage.Confirm("确定要删除此美女文件夹吗？")== DialogResult.No) return;
+
+            var folderObj = (FolderObj)BaseObj;
+            ss.DelFolder(folderObj);
+            ss.Save();
+            FolderDeleted?.Invoke(this);
+        }
+
+        private void barDelAllMmPhoto_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (XMessage.Confirm("确定要删除此美女的所有文件夹吗？") == DialogResult.No) return;
+
+            var folderObj = (FolderObj)BaseObj;
+            var lists = ss.AllImgFolderObjList.FolderObjList
+                .Where(m => m.MmName.IsNotNullOrEmpty() && m.MmName.Equals(folderObj.MmName, StringComparison.OrdinalIgnoreCase))
+                .ToList().DeepCopyWithBinarySerialize();
+
+            foreach (var folder in lists)
+            {
+                ss.DelFolder(folder);
+            }
+
+            ss.Save();
+            FolderDeleted?.Invoke(this);
+
+        }
+
+
+        
+
+
 
 
     }
